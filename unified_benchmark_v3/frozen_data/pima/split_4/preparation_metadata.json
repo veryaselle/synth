@@ -1,0 +1,45 @@
+{
+  "split_strategy": "stratified train_test_split",
+  "test_size": 0.2,
+  "split_seed": 8,
+  "preprocessing": {
+    "zero_as_missing_columns": [
+      "Glucose",
+      "BloodPressure",
+      "SkinThickness",
+      "Insulin",
+      "BMI"
+    ],
+    "imputation": "sklearn IterativeImputer (MICE-like), train-fitted only",
+    "imputer_random_seed": 46,
+    "max_iter": 20,
+    "initial_strategy": "median",
+    "sample_posterior": false
+  },
+  "split_id": 4,
+  "n_total": 768,
+  "n_train": 614,
+  "n_test": 154,
+  "train_target_prevalence": 0.3485342019543974,
+  "test_target_prevalence": 0.35064935064935066,
+  "missing_train_processed": 0,
+  "missing_test_processed": 0,
+  "files": {
+    "real_train_raw": {
+      "path": "real_train_raw.csv",
+      "sha256": "0c2d4ce8fb4c1255d5c5329f4bcda81b2b78f26e85efc9635f9bad30a5f80be9"
+    },
+    "real_test_raw": {
+      "path": "real_test_raw.csv",
+      "sha256": "cd774aa0256a78c42e31192e8e7372d86cf84898062b11fa8bdf101082ba86f9"
+    },
+    "real_train": {
+      "path": "real_train.csv",
+      "sha256": "3850202e8bd240e1fd3f895bea3d2435d7764020752559758ce860b3fefd922b"
+    },
+    "real_test": {
+      "path": "real_test.csv",
+      "sha256": "4b7b4258fb9a31b2ac68297d06d1cd3ee86085a3741036286b6912d6d61899fa"
+    }
+  }
+}

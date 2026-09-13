@@ -1,0 +1,48 @@
+{
+  "version": "v3",
+  "datasets": [
+    "pima",
+    "cleveland",
+    "ckd"
+  ],
+  "n_splits_per_dataset": 5,
+  "methods": [
+    "TVAE",
+    "CTGAN",
+    "CopulaGAN",
+    "ARF",
+    "Gaussian Copula",
+    "Conditional DDPM",
+    "LLM"
+  ],
+  "primary_release_size": "1x",
+  "primary_metrics": {
+    "utility": [
+      "AUROC",
+      "F1@0.5",
+      "Brier"
+    ],
+    "fidelity": [
+      "PCD",
+      "WS",
+      "JS"
+    ],
+    "privacy": [
+      "DCR",
+      "MIA AUROC",
+      "AIA normalized excess risk"
+    ]
+  },
+  "frozen_split_files": 15,
+  "python_files": [
+    "evaluate_release.py",
+    "evaluate_real_reference.py",
+    "assemble_main_tables.py",
+    "generate_sdv_arf.py",
+    "prepare_frozen_datasets.py"
+  ],
+  "sdv_arf_runner": "dry-run validated on all three datasets",
+  "evaluator": "syntax validated; bootstrap memorisation smoke control executed on PIMA splits 0-3 and real reference on all 5 PIMA splits",
+  "pima_real_reference_mean_auroc_smoke": 0.802,
+  "note": "Conditional DDPM and LLM generator adapters are the next implementation stage."
+}

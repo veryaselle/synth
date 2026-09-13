@@ -1,0 +1,20 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "status": "supplementary robustness experiment; does not replace primary frozen benchmark",
+  "realization_seed": 2026,
+  "n_splits_per_dataset": 5,
+  "test_size": 0.2,
+  "partition_policy": {
+    "pima": "stratified train_test_split seeds 2026..2030",
+    "cleveland": "StratifiedShuffleSplit(n_splits=5, random_state=2026)",
+    "ckd": "StratifiedShuffleSplit(n_splits=5, random_state=2026)"
+  },
+  "held_constant": {
+    "generator_seed_schedule": "42 + split_id",
+    "evaluator_seed": 42,
+    "release_size": "1x",
+    "generator_hyperparameters": "same frozen configurations as primary benchmark",
+    "evaluation_pipeline": "same evaluate_release.py / evaluate_real_reference.py"
+  },
+  "interpretation": "Primarily probes sensitivity to an independently shuffled train/test partition realization. Retraining stochastic generators can still contribute residual run variation; this experiment is not a complete multi-seed generator-stochasticity study."
+}

@@ -1,0 +1,26 @@
+feature,role,recommended_preprocessing
+age,numerical,training-only median imputation + standardization
+bp,numerical,training-only median imputation + standardization
+bgr,numerical,training-only median imputation + standardization
+bu,numerical,training-only median imputation + standardization
+sc,numerical,training-only median imputation + standardization
+sod,numerical,training-only median imputation + standardization
+pot,numerical,training-only median imputation + standardization
+hemo,numerical,training-only median imputation + standardization
+pcv,numerical,training-only median imputation + standardization
+wc,numerical,training-only median imputation + standardization
+rc,numerical,training-only median imputation + standardization
+sg,ordinal categorical,training-only most-frequent imputation + one-hot encoding
+al,ordinal categorical,training-only most-frequent imputation + one-hot encoding
+su,ordinal categorical,training-only most-frequent imputation + one-hot encoding
+rbc,nominal categorical,training-only most-frequent imputation + one-hot encoding
+pc,nominal categorical,training-only most-frequent imputation + one-hot encoding
+pcc,nominal categorical,training-only most-frequent imputation + one-hot encoding
+ba,nominal categorical,training-only most-frequent imputation + one-hot encoding
+htn,nominal categorical,training-only most-frequent imputation + one-hot encoding
+dm,nominal categorical,training-only most-frequent imputation + one-hot encoding
+cad,nominal categorical,training-only most-frequent imputation + one-hot encoding
+appet,nominal categorical,training-only most-frequent imputation + one-hot encoding
+pe,nominal categorical,training-only most-frequent imputation + one-hot encoding
+ane,nominal categorical,training-only most-frequent imputation + one-hot encoding
+target,binary target,"ckd=1, notckd=0"

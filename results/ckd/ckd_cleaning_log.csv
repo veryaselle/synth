@@ -1,0 +1,15 @@
+rule,affected_values
+strip_whitespace:pcv,2
+question_mark_to_missing:pcv,1
+strip_whitespace:wc,3
+question_mark_to_missing:wc,1
+strip_whitespace:rc,1
+question_mark_to_missing:rc,1
+strip_whitespace:dm,6
+strip_whitespace:cad,2
+strip_whitespace:classification,2
+numeric_conversion:pcv,0
+numeric_conversion:wc,0
+numeric_conversion:rc,0
+sodium_below_100_to_missing,1
+potassium_above_10_to_missing,2

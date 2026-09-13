@@ -1,0 +1,7 @@
+dataset,method,frozen_AUROC,best_nonbaseline_AUROC,delta_AUROC,batch_size,discriminator_lr
+pima,CTGAN,0.643,0.795,0.152,100,2e-4
+pima,CopulaGAN,0.593,0.792,0.199,200,2e-4
+cleveland,CTGAN,0.651,0.607,-0.045,100,5e-4
+cleveland,CopulaGAN,0.443,0.608,0.165,100,2e-4
+ckd,CTGAN,0.524,0.641,0.117,100,2e-4
+ckd,CopulaGAN,0.596,0.722,0.126,100,5e-4

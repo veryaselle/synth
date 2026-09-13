@@ -1,0 +1,52 @@
+feature,role,pilot_recommendation,reason,missing_pct,n_unique_nonmissing
+encounter_id,technical identifier,exclude from generator features,Unique encounter identifier; would create direct identifier leakage and meaningless generated IDs.,0.0,101766
+patient_nbr,patient-group identifier,use only for grouped splitting,Required to keep all encounters from the same patient in one partition; exclude from generator features.,0.0,71518
+time_in_hospital,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,14
+num_lab_procedures,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,118
+num_procedures,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,7
+num_medications,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,75
+number_outpatient,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,39
+number_emergency,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,33
+number_inpatient,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,21
+number_diagnoses,numerical count or duration,retain,Low-cardinality or count-valued clinical encounter feature.,0.0,16
+age,ordinal categorical,retain as categorical/ordinal,Interval-valued category; should not be treated as an unconstrained continuous number.,0.0,10
+weight,ordinal categorical,drop in primary pilot; optional sensitivity analysis,"Approximately 97% missing, creating little usable signal and unnecessary language-model tokens.",96.85847925633315,9
+admission_type_id,coded categorical,retain,Treat as categorical token; mapping can be used for interpretation.,0.0,8
+discharge_disposition_id,coded categorical,retain,Treat as categorical token; mapping can be used for interpretation.,0.0,26
+admission_source_id,coded categorical,retain,Treat as categorical token; mapping can be used for interpretation.,0.0,17
+diag_1,coded categorical,retain,"High-cardinality diagnosis code; retain as a string token for the first pilot, then inspect validity and rare-code generation before full training.",0.02063557573256294,716
+diag_2,coded categorical,retain,"High-cardinality diagnosis code; retain as a string token for the first pilot, then inspect validity and rare-code generation before full training.",0.3517874339170253,748
+diag_3,coded categorical,retain,"High-cardinality diagnosis code; retain as a string token for the first pilot, then inspect validity and rare-code generation before full training.",1.398305917497003,789
+race,nominal categorical,retain,Nominal categorical encounter feature.,2.2335554114340743,5
+gender,nominal categorical,retain,Nominal categorical encounter feature.,0.0,3
+payer_code,nominal categorical,retain initially; monitor missingness,About 40% missing and 17 observed payer codes.,39.5574160328597,17
+medical_specialty,nominal categorical,retain initially; monitor rare levels,About 49% missing and 73 observed levels; potentially informative but challenging.,49.08220820313268,72
+max_glu_serum,nominal categorical,retain as measurement-result categorical,High missingness likely represents an unperformed test and should be modelled explicitly.,94.74677200636755,3
+A1Cresult,nominal categorical,retain as measurement-result categorical,High missingness likely represents an unperformed test and should be modelled explicitly.,83.27732248491637,3
+metformin,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+repaglinide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+nateglinide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+chlorpropamide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+glimepiride,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+acetohexamide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+glipizide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+glyburide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+tolbutamide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+pioglitazone,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+rosiglitazone,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+acarbose,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+miglitol,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+troglitazone,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+tolazamide,nominal categorical,retain,Nominal categorical encounter feature.,0.0,3
+examide,nominal categorical,drop,Constant in the supplied dataset.,0.0,1
+citoglipton,nominal categorical,drop,Constant in the supplied dataset.,0.0,1
+insulin,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+glyburide-metformin,nominal categorical,retain,Nominal categorical encounter feature.,0.0,4
+glipizide-metformin,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+glimepiride-pioglitazone,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+metformin-rosiglitazone,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+metformin-pioglitazone,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+change,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+diabetesMed,nominal categorical,retain,Nominal categorical encounter feature.,0.0,2
+readmitted,source target,replace with binary target,Map <30 to 1 and combine >30 with NO as 0 for early-readmission prediction.,0.0,3
+readmitted_30d,binary target,retain as conditional generation target,Early readmission within 30 days.,0.0,2

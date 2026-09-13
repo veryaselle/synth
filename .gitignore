@@ -1,0 +1,37 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.DS_Store
+.env
+.env.*
+.conda/
+.venv/
+venv/
+env/
+
+# Regenerable model and trainer artifacts.
+**/saved_model/
+**/trainer/
+**/checkpoint-*/
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+pytorch_model*.bin
+
+# Temporary generation artifacts.
+**/raw_chunks/
+**/*_PARTIAL.csv
+*.log
+
+# Large regenerated evaluation detail not required for the tracked snapshot.
+results/**/predictions/
+results/**/generated_releases/
+results/**/figures/
+
+# Slurm/runtime logs
+logs/
+**/logs/

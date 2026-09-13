@@ -1,0 +1,46 @@
+{
+  "records": 400,
+  "features": 24,
+  "numeric_features": [
+    "age",
+    "bp",
+    "bgr",
+    "bu",
+    "sc",
+    "sod",
+    "pot",
+    "hemo",
+    "pcv",
+    "wc",
+    "rc"
+  ],
+  "ordinal_categorical_features": [
+    "sg",
+    "al",
+    "su"
+  ],
+  "nominal_categorical_features": [
+    "rbc",
+    "pc",
+    "pcc",
+    "ba",
+    "htn",
+    "dm",
+    "cad",
+    "appet",
+    "pe",
+    "ane"
+  ],
+  "target": "target",
+  "target_mapping": {
+    "notckd": 0,
+    "ckd": 1
+  },
+  "split_protocol": {
+    "type": "StratifiedShuffleSplit",
+    "n_splits": 5,
+    "test_size": 0.2,
+    "random_seed": 42
+  },
+  "leakage_control": "Imputation, scaling and one-hot encoding are fitted only on each training split through a scikit-learn Pipeline."
+}

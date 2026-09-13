@@ -1,0 +1,56 @@
+{
+  "release": "thesis-v1.0-clone-ready",
+  "audit_date": "2026-09-03",
+  "repository": "https://github.com/veryaselle/synth",
+  "primary_datasets": [
+    "pima",
+    "cleveland",
+    "ckd"
+  ],
+  "primary_generators": [
+    "TVAE",
+    "CTGAN",
+    "CopulaGAN",
+    "ARF",
+    "Gaussian Copula",
+    "Conditional DDPM",
+    "LLM"
+  ],
+  "model_families": 6,
+  "frozen_splits_per_dataset": 5,
+  "portable_path_policy": {
+    "top_level_benchmark_python": "REPOSITORY_ROOT = Path(__file__).resolve().parents[1]",
+    "historical_scripts": "REPOSITORY_ROOT = Path(__file__).resolve().parents[2]",
+    "nested_scripts": "structurally correct parents[...] depth",
+    "shell": "BASH_SOURCE-derived benchmark root",
+    "slurm": "BENCHMARK_ROOT exported by submit wrappers; CORE_PY/LLM_PY optional",
+    "cwd_dependent_project_defaults": false,
+    "user_specific_absolute_paths_in_executable_files": false
+  },
+  "tests": {
+    "clone_ready_verifier": "pass",
+    "python_compileall": "pass",
+    "bash_syntax_all_sh_sbatch": "pass",
+    "executable_absolute_path_scan": "pass",
+    "cwd_sensitive_python_default_scan": "pass",
+    "frozen_regeneration_from_outside_repo": "pass",
+    "copy_under_path_with_spaces_verification": "pass",
+    "pima_preflight_dry_run": "pass",
+    "cleveland_preflight_dry_run": "pass",
+    "ckd_preflight_dry_run": "pass",
+    "evaluator_memorization_smoke": "pass",
+    "historical_ckd_default_path_smoke": "pass",
+    "historical_cleveland_default_path_smoke": "pass",
+    "historical_diabetes130_default_path_smoke": "pass",
+    "experimental_artifact_hashes_before_after_refactor": "identical",
+    "local_git_commit_and_fresh_clone": "pass",
+    "all_tracked_file_bytes_match_after_clone": "pass",
+    "git_staged_package_file_count": 362
+  },
+  "pima_llm_reproduction": {
+    "exact_final_release": "requires preserved split-specific 10-epoch checkpoints; checkpoints are deliberately not included and exact job refuses silent retraining",
+    "fresh_clone_path": "submit_pima_all_fresh.sh retrains the same declared configuration; stochastic rerun is not byte-identical to the preserved thesis checkpoint"
+  },
+  "tracked_package_file_count": 362,
+  "git_attributes": "CSV text normalization disabled (-text) to preserve tracked artifact bytes across clones"
+}

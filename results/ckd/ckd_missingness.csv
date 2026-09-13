@@ -1,0 +1,25 @@
+feature,missing_n,missing_pct,n_unique_nonmissing,feature_group
+rbc,152,38.0,2,nominal categorical
+rc,131,32.75,45,numeric
+wc,106,26.5,89,numeric
+pot,90,22.5,38,numeric
+sod,88,22.0,33,numeric
+pcv,71,17.75,42,numeric
+pc,65,16.25,2,nominal categorical
+hemo,52,13.0,115,numeric
+su,49,12.25,6,ordinal categorical
+sg,47,11.75,5,ordinal categorical
+al,46,11.5,6,ordinal categorical
+bgr,44,11.0,146,numeric
+bu,19,4.75,118,numeric
+sc,17,4.25,84,numeric
+bp,12,3.0,10,numeric
+age,9,2.25,76,numeric
+pcc,4,1.0,2,nominal categorical
+ba,4,1.0,2,nominal categorical
+htn,2,0.5,2,nominal categorical
+dm,2,0.5,2,nominal categorical
+cad,2,0.5,2,nominal categorical
+appet,1,0.25,2,nominal categorical
+pe,1,0.25,2,nominal categorical
+ane,1,0.25,2,nominal categorical

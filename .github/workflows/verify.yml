@@ -1,0 +1,18 @@
+name: verify-repository
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  syntax-and-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install verification dependency
+        run: python -m pip install pandas
+      - name: Verify portable thesis repository
+        run: python scripts/maintenance/verify_clone_ready.py

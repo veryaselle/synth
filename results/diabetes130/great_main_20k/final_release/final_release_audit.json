@@ -1,0 +1,309 @@
+{
+  "policy": {
+    "diagnosis_projection": "Out-of-schema diag_1/diag_2/diag_3 values -> __RARE__.",
+    "field_spillover_recovery": "Unique longest training-valid prefix for A1Cresult, max_glu_serum, age and race.",
+    "numeric_support_projection": "Parseable out-of-range values clipped to real-training minimum or maximum.",
+    "irrecoverable_rows": "Rejected; no mode or arbitrary category imputation."
+  },
+  "raw_rows": 20000,
+  "final_rows": 19999,
+  "retained_row_rate": 0.99995,
+  "rejected_rows": 1,
+  "rejected_row_rate": 5e-05,
+  "rejected_original_row_indices": [
+    1584
+  ],
+  "diagnosis_repaired_cells": 164,
+  "diagnosis_repaired_rows": 164,
+  "diagnosis_repairs_by_feature": {
+    "diag_1": 68,
+    "diag_2": 42,
+    "diag_3": 54
+  },
+  "prefix_recovered_cells": 979,
+  "prefix_recovered_rows": 979,
+  "prefix_repairs_by_feature": {
+    "A1Cresult": 399,
+    "max_glu_serum": 342,
+    "age": 234,
+    "race": 4
+  },
+  "numeric_clipped_cells": 3,
+  "numeric_clipped_rows": 3,
+  "numeric_clips_by_feature": {
+    "time_in_hospital": 1,
+    "num_procedures": 1,
+    "number_diagnoses": 1
+  },
+  "rejections_by_reason": {
+    "remaining_out_of_schema_category": 1
+  },
+  "final_validation": {
+    "rows": 19999,
+    "expected_columns": 43,
+    "returned_columns": 43,
+    "missing_columns": [],
+    "extra_columns": [],
+    "target_invalid_n": 0,
+    "numeric_invalid_cells": 0,
+    "numeric_range_violation_cells": 0,
+    "categorical_unseen_cells": 0,
+    "exact_duplicate_n_vs_full_real_train": 0,
+    "exact_duplicate_rate_vs_full_real_train": 0.0,
+    "internal_duplicate_row_n": 0,
+    "internal_duplicate_rate": 0.0,
+    "positive_rate": 0.11390569528476424,
+    "pass_column_set": true,
+    "pass_binary_target": true,
+    "pass_numeric_parseability": true,
+    "pass_numeric_training_ranges": true,
+    "pass_closed_categorical_schema": true,
+    "numeric_details": [
+      {
+        "feature": "time_in_hospital",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 1.0,
+        "real_max": 14.0,
+        "synthetic_min": 1.0,
+        "synthetic_max": 14.0
+      },
+      {
+        "feature": "num_lab_procedures",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 1.0,
+        "real_max": 132.0,
+        "synthetic_min": 1.0,
+        "synthetic_max": 120.0
+      },
+      {
+        "feature": "num_procedures",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 0.0,
+        "real_max": 6.0,
+        "synthetic_min": 0.0,
+        "synthetic_max": 6.0
+      },
+      {
+        "feature": "num_medications",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 1.0,
+        "real_max": 79.0,
+        "synthetic_min": 1.0,
+        "synthetic_max": 60.0
+      },
+      {
+        "feature": "number_outpatient",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 0.0,
+        "real_max": 42.0,
+        "synthetic_min": 0.0,
+        "synthetic_max": 10.0
+      },
+      {
+        "feature": "number_emergency",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 0.0,
+        "real_max": 76.0,
+        "synthetic_min": 0.0,
+        "synthetic_max": 6.0
+      },
+      {
+        "feature": "number_inpatient",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 0.0,
+        "real_max": 21.0,
+        "synthetic_min": 0.0,
+        "synthetic_max": 11.0
+      },
+      {
+        "feature": "number_diagnoses",
+        "invalid_n": 0,
+        "range_violation_n": 0,
+        "real_min": 1.0,
+        "real_max": 16.0,
+        "synthetic_min": 1.0,
+        "synthetic_max": 10.0
+      }
+    ],
+    "categorical_details": [
+      {
+        "feature": "race",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "gender",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "age",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "admission_type_id",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "discharge_disposition_id",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "admission_source_id",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "diag_1",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "diag_2",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "diag_3",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "max_glu_serum",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "A1Cresult",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "metformin",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "repaglinide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "nateglinide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "chlorpropamide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "glimepiride",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "acetohexamide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "glipizide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "glyburide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "tolbutamide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "pioglitazone",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "rosiglitazone",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "acarbose",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "miglitol",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "troglitazone",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "tolazamide",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "insulin",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "glyburide-metformin",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "glipizide-metformin",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "glimepiride-pioglitazone",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "metformin-rosiglitazone",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "metformin-pioglitazone",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "change",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      },
+      {
+        "feature": "diabetesMed",
+        "unseen_n": 0,
+        "unseen_pct": 0.0
+      }
+    ],
+    "overall_schema_pass": true
+  }
+}

@@ -1,0 +1,11 @@
+item,value
+raw_records,400.0
+raw_columns_including_id_and_target,26.0
+model_features_after_cleaning,24.0
+numeric_features,11.0
+categorical_or_ordinal_features,13.0
+target_0_notckd,150.0
+target_1_ckd,250.0
+target_1_rate,0.625
+duplicate_rows_excluding_id,0.0
+total_missing_feature_values_after_cleaning,1015.0

@@ -1,0 +1,27 @@
+{
+  "experiment": "independent split-realization robustness checks",
+  "role": "supplementary robustness analysis; primary frozen benchmark remains unchanged",
+  "initial_realization_seed": 2026,
+  "additional_realization_seeds": [3719704],
+  "reported_realization_seeds": [2026, 3719704],
+  "n_splits_per_dataset": 5,
+  "test_size": 0.2,
+  "partition_policy": {
+    "pima": "five stratified train_test_split calls with seeds realization_seed through realization_seed + 4",
+    "cleveland": "StratifiedShuffleSplit(n_splits=5, test_size=0.2, random_state=realization_seed)",
+    "ckd": "StratifiedShuffleSplit(n_splits=5, test_size=0.2, random_state=realization_seed)"
+  },
+  "held_constant_from_primary": {
+    "generator_seed_schedule": "42 + split_id",
+    "evaluator_seed": 42,
+    "release_size": "1x",
+    "generator_hyperparameters": "frozen primary configurations",
+    "classifiers": ["LR", "MLP", "Random Forest", "XGBoost"],
+    "utility_metrics": ["AUROC", "F1@0.5", "Brier"],
+    "fidelity_metrics": ["PCD", "normalized Wasserstein", "Jensen-Shannon"],
+    "privacy_audits": ["DCR descriptive", "MIA AUROC", "AIA risk"]
+  },
+  "primary_question": "Are the qualitative generator rankings and dimension-level conclusions robust to independently shuffled train/test partition realizations?",
+  "seed_selection_note": "Seed 2026 was the initial supplementary realization. Seed 3719704 was added as a further independent partition-realization sensitivity check. Neither realization replaces the frozen primary benchmark.",
+  "interpretation_boundary": "Retraining stochastic generators can contribute residual run variation. These checks do not constitute a complete repeated-generator-seed experiment and are not pooled into a larger primary benchmark."
+}

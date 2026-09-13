@@ -1,0 +1,5 @@
+config_id,root,discriminator_lr,is_baseline,notes
+baseline_b500_d2e4,results/main_benchmark,0.0002,1,Frozen primary GAN configuration
+b100_d2e4,results/gan_sensitivity,0.0002,0,Exploratory batch-size sensitivity run
+b200_d2e4,results/gan_sensitivity/b200,0.0002,0,Exploratory intermediate batch-size run
+b100_d5e4,results/gan_sensitivity/lr5e4_b100,0.0005,0,Exploratory higher discriminator learning-rate run

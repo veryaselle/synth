@@ -1,0 +1,35 @@
+{
+  "split_strategy": "StratifiedShuffleSplit",
+  "n_splits": 5,
+  "test_size": 0.2,
+  "split_seed": 42,
+  "preprocessing": {
+    "imputation": "none; cleaned input has zero missing values"
+  },
+  "split_id": 0,
+  "n_total": 303,
+  "n_train": 242,
+  "n_test": 61,
+  "train_target_prevalence": 0.45867768595041325,
+  "test_target_prevalence": 0.45901639344262296,
+  "missing_train_processed": 0,
+  "missing_test_processed": 0,
+  "files": {
+    "real_train_raw": {
+      "path": "real_train_raw.csv",
+      "sha256": "c0e453bc7641f8f562730d2168346178afb7289a897986c9b0993a5ccd00cc21"
+    },
+    "real_test_raw": {
+      "path": "real_test_raw.csv",
+      "sha256": "19d5d39f29d622d61566c3c7220f1e2a70f8373d0b47b1dea41d212ef89eeffb"
+    },
+    "real_train": {
+      "path": "real_train.csv",
+      "sha256": "c0e453bc7641f8f562730d2168346178afb7289a897986c9b0993a5ccd00cc21"
+    },
+    "real_test": {
+      "path": "real_test.csv",
+      "sha256": "19d5d39f29d622d61566c3c7220f1e2a70f8373d0b47b1dea41d212ef89eeffb"
+    }
+  }
+}

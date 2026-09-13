@@ -1,0 +1,17 @@
+item,value
+encounters,101766.0
+raw_columns,50.0
+candidate_predictive_features_before_drops,47.0
+unique_encounter_ids,101766.0
+unique_patients,71518.0
+patients_with_multiple_encounters,16773.0
+maximum_encounters_per_patient,40.0
+encounters_belonging_to_repeat_patients_pct,46.20501935813533
+readmitted_lt30_n,11357.0
+readmitted_lt30_pct,11.159915885462727
+no_or_gt30_n,90409.0
+exact_duplicate_full_rows,0.0
+duplicate_encounter_ids,0.0
+candidate_death_or_hospice_exclusions_n,2423.0
+eligible_encounters_after_candidate_exclusion,99343.0
+eligible_readmitted_lt30_pct,11.388824577474004

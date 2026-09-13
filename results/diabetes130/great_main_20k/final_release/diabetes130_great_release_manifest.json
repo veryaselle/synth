@@ -1,0 +1,79 @@
+{
+  "artifact_set": "Diabetes 130-US GReaT 20K exploratory release",
+  "status": "frozen_for_evaluation",
+  "generator_configuration": {
+    "python": "3.11.15",
+    "torch": "2.11.0+cu130",
+    "transformers": "5.14.1",
+    "accelerate": "1.14.0",
+    "be-great": "0.0.14",
+    "gpu": "NVIDIA GeForce RTX 2080 Ti",
+    "gpu_memory_gb": 10.567,
+    "train_rows": 20000,
+    "feature_count": 42,
+    "positive_rate": 0.1139,
+    "n_synthetic": 20000,
+    "negative_requested": 17722,
+    "positive_requested": 2278,
+    "sampling_batch_size": 50,
+    "chunk_size": 500,
+    "max_length": 512,
+    "temperature": 0.7
+  },
+  "final_release": {
+    "raw_rows": 20000,
+    "final_rows": 19999,
+    "retained_row_rate": 0.99995,
+    "positive_rate": 0.11390569528476424,
+    "overall_schema_pass": true,
+    "exact_duplicate_rate_vs_full_real_train": 0.0,
+    "internal_duplicate_rate": 0.0
+  },
+  "files": [
+    {
+      "file": "run_summary.json",
+      "size_bytes": 702,
+      "sha256": "0addc88ec0100f1d206df06e6ca4e82c1c3be82c38342f2da1df912f00b94117"
+    },
+    {
+      "file": "run_configuration.json",
+      "size_bytes": 447,
+      "sha256": "c06c65bae37ba8c14c2acaf0afe3aa8495cd2670cbae445e531256af8aa81b92"
+    },
+    {
+      "file": "row_rejection_log.csv",
+      "size_bytes": 85,
+      "sha256": "f0b81f3c2b045a23e0f8ab1cab32e2cedaca6fd45003272c8ddfe118f02f17df"
+    },
+    {
+      "file": "numeric_support_projection_log.csv",
+      "size_bytes": 211,
+      "sha256": "8de2941667bbdb5af02fee833e97d18edf993a70ccc66b420f1a45bbdaabe965"
+    },
+    {
+      "file": "categorical_prefix_recovery_log.csv",
+      "size_bytes": 108089,
+      "sha256": "969267f801a1e7bf5406ae81ef9569d3221cab3d8e31162d06278fa61a2779bc"
+    },
+    {
+      "file": "diagnosis_projection_log.csv",
+      "size_bytes": 5318,
+      "sha256": "8bea02ee5e5406535f159bbde9fd45aa14b074d90e3bb91b90c558146be37846"
+    },
+    {
+      "file": "final_release_audit.json",
+      "size_bytes": 7187,
+      "sha256": "822eadbfd47a40dace1fba578f07bdeda1eef15a5e6284638e1811b7998c49f6"
+    },
+    {
+      "file": "synthetic_final_valid.csv",
+      "size_bytes": 3191842,
+      "sha256": "a4278d7a7d1bc0ca52437cbff560ba7d471064a7b9108f7fc17189f16f85ccc2"
+    },
+    {
+      "file": "synthetic_raw_20000.csv",
+      "size_bytes": 3708010,
+      "sha256": "776b2c242fd9ed4a25164d5a4353c575e9d18b78d9f499fefcf0b8b3ba60bc81"
+    }
+  ]
+}
