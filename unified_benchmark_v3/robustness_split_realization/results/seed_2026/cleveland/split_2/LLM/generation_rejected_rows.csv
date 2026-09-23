@@ -1,0 +1,2 @@
+_target_requested,_chunk_index,_attempt,_original_index,age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal,target
+1,0,0,53,70.0,1,2,125.0,212.0,0,2,112.0,0,2.2,1,4,1,1.0

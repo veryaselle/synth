@@ -1,0 +1,4 @@
+target,chunk_index,attempt,requested_rows,accepted_rows,rejected_rows,status,seconds,peak_gpu_memory_gb,path
+0,0,0,120,120,0,OK,65.6355094909668,4.82,results/main_benchmark/ckd/split_4/LLM/raw_attempts/target_0/chunk_0000_attempt_000.csv
+1,0,0,200,199,1,RESAMPLED,87.22249627113342,4.82,results/main_benchmark/ckd/split_4/LLM/raw_attempts/target_1/chunk_0000_attempt_000.csv
+1,0,1,1,1,0,OK,15.00932264328003,1.485,results/main_benchmark/ckd/split_4/LLM/raw_attempts/target_1/chunk_0000_attempt_001.csv

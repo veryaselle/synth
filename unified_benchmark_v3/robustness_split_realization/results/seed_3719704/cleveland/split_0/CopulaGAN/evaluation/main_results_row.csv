@@ -1,0 +1,2 @@
+dataset,method,synthetic_size_label,n_real_train,n_real_test,n_synthetic,utility_auroc,utility_f1,utility_brier,fidelity_pcd,fidelity_ws,fidelity_js,privacy_dcr_mean,privacy_dcr_ratio,privacy_mia_auc,privacy_aia_risk
+cleveland,CopulaGAN,1x,242,61,242,0.6543560606060606,0.5989156250526843,0.26907659757521707,0.12994498607280708,0.3936832257336252,0.03592305533302768,1.3654694985852613,1.4521650220472642,0.5291588282719699,0.0

@@ -1,12 +1,12 @@
 #!/bin/bash
-#SBATCH --job-name=clev_copulagan_b100
+#SBATCH --job-name=clev_copula_b100
 #SBATCH --array=0-4%2
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=8G
 #SBATCH --time=02:00:00
-#SBATCH --output=logs/cleveland_copulagan_b100_%A_%a.out
-#SBATCH --error=logs/cleveland_copulagan_b100_%A_%a.err
+#SBATCH --output=logs/clev_copula_b100_%A_%a.out
+#SBATCH --error=logs/clev_copula_b100_%A_%a.err
 
 set -eo pipefail
 BENCHMARK_ROOT="${BENCHMARK_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
@@ -16,24 +16,17 @@ export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export NUMEXPR_NUM_THREADS=1
-export TOKENIZERS_PARALLELISM=false
 
 PY="${CORE_PY:-python}"
-
 SPLIT=$SLURM_ARRAY_TASK_ID
 SEED=$((42 + SPLIT))
-
-echo "============================================================"
-echo "cleveland CopulaGAN | batch=100 | discriminator_lr=0.0002"
-echo "split=${SPLIT} seed=${SEED}"
-echo "host=$(hostname)"
-echo "============================================================"
+OUT=results/gan_sensitivity/cleveland/split_${SPLIT}/CopulaGAN_b100
 
 $PY generate_sdv_arf_safe_cpu.py \
   --method copulagan \
   --real_train frozen_data/cleveland/split_${SPLIT}/real_train.csv \
   --schema frozen_data/cleveland/split_${SPLIT}/schema.json \
-  --outdir results/gan_sensitivity/cleveland/split_${SPLIT}/CopulaGAN \
+  --outdir "$OUT" \
   --seed ${SEED} \
   --epochs 300 \
   --batch_size 100 \
@@ -41,20 +34,17 @@ $PY generate_sdv_arf_safe_cpu.py \
   --joblib_n_jobs 1 \
   --verbose
 
-echo "=== GENERATION COMPLETE ==="
-
 $PY evaluate_release.py \
   --dataset cleveland \
-  --method "CopulaGAN" \
+  --method CopulaGAN \
   --real_train frozen_data/cleveland/split_${SPLIT}/real_train.csv \
   --real_test frozen_data/cleveland/split_${SPLIT}/real_test.csv \
-  --synthetic results/gan_sensitivity/cleveland/split_${SPLIT}/CopulaGAN/synthetic_1x.csv \
+  --synthetic "$OUT/synthetic_1x.csv" \
   --target target \
   --numeric_cols age,trestbps,chol,thalach,oldpeak \
   --categorical_cols sex,cp,fbs,restecg,exang,slope,ca,thal \
   --aia_k 1 \
   --seed 42 \
-  --outdir results/gan_sensitivity/cleveland/split_${SPLIT}/CopulaGAN/evaluation
+  --outdir "$OUT/evaluation"
 
-echo "=== CopulaGAN split_${SPLIT} COMPLETE ==="
-cat results/gan_sensitivity/cleveland/split_${SPLIT}/CopulaGAN/evaluation/main_results_row.csv
+cat "$OUT/evaluation/main_results_row.csv"

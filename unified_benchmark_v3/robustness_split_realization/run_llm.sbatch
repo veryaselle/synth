@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=splitrob_llm
+#SBATCH --job-name=rob2_llm
 #SBATCH --partition=clara
 #SBATCH --gpus=rtx2080ti:1
 #SBATCH --array=0-14%1

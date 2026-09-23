@@ -8,8 +8,7 @@
 #SBATCH --output=logs/ckd_sdv_%A_%a.out
 #SBATCH --error=logs/ckd_sdv_%A_%a.err
 set -eo pipefail
-BENCHMARK_ROOT="${BENCHMARK_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
-cd "$BENCHMARK_ROOT"
+cd "$SLURM_SUBMIT_DIR"
 export OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 TOKENIZERS_PARALLELISM=false
 PY="${CORE_PY:-python}"
 METHOD_KEYS=(tvae ctgan copulagan gaussian_copula arf)

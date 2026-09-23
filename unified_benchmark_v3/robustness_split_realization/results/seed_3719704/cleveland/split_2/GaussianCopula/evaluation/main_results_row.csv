@@ -1,0 +1,2 @@
+dataset,method,synthetic_size_label,n_real_train,n_real_test,n_synthetic,utility_auroc,utility_f1,utility_brier,fidelity_pcd,fidelity_ws,fidelity_js,privacy_dcr_mean,privacy_dcr_ratio,privacy_mia_auc,privacy_aia_risk
+cleveland,Gaussian Copula,1x,242,61,242,0.8923160173160174,0.8130209513736748,0.15008729194365508,0.09548627909777567,0.24932685188595727,0.0313260934530031,1.0600291721245838,1.1864764715667482,0.5554958344531039,0.0

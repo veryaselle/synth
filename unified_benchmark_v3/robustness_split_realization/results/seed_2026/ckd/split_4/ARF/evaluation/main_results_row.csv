@@ -1,0 +1,2 @@
+dataset,method,synthetic_size_label,n_real_train,n_real_test,n_synthetic,utility_auroc,utility_f1,utility_brier,fidelity_pcd,fidelity_ws,fidelity_js,privacy_dcr_mean,privacy_dcr_ratio,privacy_mia_auc,privacy_aia_risk
+ckd,ARF,1x,320,80,320,0.9845,0.9567567426845777,0.045384768965471986,0.06408889315794425,0.15209748138120058,0.03253428148100582,1.1313840177250545,1.041462441558725,0.48062499999999997,0.0

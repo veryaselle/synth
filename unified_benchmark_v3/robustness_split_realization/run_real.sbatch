@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=splitrob_real
+#SBATCH --job-name=rob2_real
 #SBATCH --array=0-14%3
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2

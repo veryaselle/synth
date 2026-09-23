@@ -1,0 +1,20 @@
+{
+  "utility": {
+    "dataset": "ckd",
+    "method": "REAL",
+    "synthetic_size_label": "NA",
+    "n_real_train": 320,
+    "n_real_test": 80,
+    "n_synthetic": "",
+    "utility_auroc": 0.9998333333333334,
+    "utility_f1": 0.9898474541331684,
+    "utility_brier": 0.008505773850740278,
+    "fidelity_pcd": "",
+    "fidelity_ws": "",
+    "fidelity_js": "",
+    "privacy_dcr_mean": "",
+    "privacy_dcr_ratio": "",
+    "privacy_mia_auc": "",
+    "privacy_aia_risk": ""
+  }
+}

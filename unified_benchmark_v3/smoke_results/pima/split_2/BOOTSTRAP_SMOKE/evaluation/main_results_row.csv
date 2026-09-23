@@ -1,2 +1,0 @@
-dataset,method,synthetic_size_label,n_real_train,n_real_test,n_synthetic,utility_auroc,utility_f1,utility_brier,fidelity_pcd,fidelity_ws,fidelity_js,privacy_dcr_mean,privacy_dcr_ratio,privacy_mia_auc,privacy_aia_risk
-pima,BOOTSTRAP_SMOKE,1x,614,154,614,0.8429861111111112,0.610882951363752,0.16805904113638737,0.03668234968232018,0.07647808664107977,0.005771398884339263,9.040904109325379e-20,4.91104434922649e-19,0.7989121268342048,0.6585365853658536

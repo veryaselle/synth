@@ -37,6 +37,7 @@ $PY generate_sdv_arf_safe_cpu.py \
   --seed ${SEED} \
   --epochs 300 \
   --batch_size 200 \
+  --discriminator_lr 0.0002 \
   --joblib_n_jobs 1 \
   --verbose
 

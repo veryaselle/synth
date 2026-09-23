@@ -1,0 +1,2 @@
+dataset,method,synthetic_size_label,n_real_train,n_real_test,n_synthetic,utility_auroc,utility_f1,utility_brier,fidelity_pcd,fidelity_ws,fidelity_js,privacy_dcr_mean,privacy_dcr_ratio,privacy_mia_auc,privacy_aia_risk
+pima,CopulaGAN,1x,614,154,614,0.703125,0.4160900649900126,0.22187786979205487,0.21608046187748953,0.7125027428670975,0.09779755726137979,0.38995800249282286,2.2497094300918477,0.5467195142519817,0.03636363636363638

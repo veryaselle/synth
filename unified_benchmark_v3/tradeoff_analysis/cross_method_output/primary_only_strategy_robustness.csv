@@ -1,0 +1,13 @@
+dataset,strategy,minmax_candidate,rank_candidate,robust_across_scoring
+ckd,utility_first,ARF::frozen,ARF::frozen,True
+ckd,fidelity_first,ARF::frozen,ARF::frozen,True
+ckd,privacy_first,Gaussian Copula::frozen,Gaussian Copula::frozen,True
+ckd,balanced_pareto,Gaussian Copula::frozen,Conditional DDPM::frozen,False
+cleveland,utility_first,Conditional DDPM::frozen,Conditional DDPM::frozen,True
+cleveland,fidelity_first,ARF::frozen,ARF::frozen,True
+cleveland,privacy_first,CopulaGAN::frozen,CopulaGAN::frozen,True
+cleveland,balanced_pareto,Gaussian Copula::frozen,LLM::frozen,False
+pima,utility_first,LLM::frozen,LLM::frozen,True
+pima,fidelity_first,ARF::frozen,Conditional DDPM::frozen,False
+pima,privacy_first,CTGAN::frozen,CTGAN::frozen,True
+pima,balanced_pareto,TVAE::frozen,LLM::frozen,False

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compare one supplementary split realization with the primary frozen benchmark.
+"""Compare the second split realization with the primary frozen benchmark.
 
 The default primary reference is the thesis-reported mean table already tracked in
 results/final_thesis/reported_primary_means.csv. If the unrounded primary numeric
@@ -291,7 +291,7 @@ def main() -> None:
     leader_df = pd.DataFrame(leader_rows)
     leader_df.to_csv(outdir / "metric_leader_stability.csv", index=False)
 
-    # Real-reference AUROC and retention under this supplementary realization.
+    # Real-reference AUROC and retention under the second realization.
     robust_all = _normalize_robust(pd.read_csv(robust_summary))
     real = robust_all[robust_all["method"] == "REAL"]["dataset utility_auroc".split()].rename(
         columns={"utility_auroc": "real_auroc_robust"}
@@ -315,7 +315,7 @@ def main() -> None:
         "median_metric_rank_spearman": float(rank_df["spearman_primary_vs_robust"].median()),
         "dimension_leader_agreement_fraction": float(dim_df["same_leader"].mean()),
         "interpretation_note": (
-            "This experiment probes robustness to an independently shuffled supplementary split realization. "
+            "This experiment probes robustness to a second independently shuffled split realization. "
             "It does not replace the primary frozen benchmark and does not fully isolate generator "
             "stochasticity. Metric-level rank agreement may use thesis-reported rounded means when the "
             "unrounded primary summary is unavailable; stored primary strategy selections are used for "

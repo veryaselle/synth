@@ -1,0 +1,5 @@
+target,chunk_index,attempt,requested_rows,accepted_rows,rejected_rows,status,seconds,peak_gpu_memory_gb,path
+0,0,0,131,130,1,RESAMPLED,65.56698656082153,4.82,results/main_benchmark/cleveland/split_3/LLM/raw_attempts/target_0/chunk_0000_attempt_000.csv
+0,0,1,1,1,0,OK,14.892611980438232,1.485,results/main_benchmark/cleveland/split_3/LLM/raw_attempts/target_0/chunk_0000_attempt_001.csv
+1,0,0,111,110,1,RESAMPLED,65.24584555625916,4.82,results/main_benchmark/cleveland/split_3/LLM/raw_attempts/target_1/chunk_0000_attempt_000.csv
+1,0,1,1,1,0,OK,14.787689685821533,1.485,results/main_benchmark/cleveland/split_3/LLM/raw_attempts/target_1/chunk_0000_attempt_001.csv

@@ -1,6 +1,6 @@
 # Local validation record
 
-The initial seed-2026 split-realization pipeline was checked before packaging.
+The second-realization pipeline was checked before packaging.
 
 ## Passed checks
 
@@ -11,8 +11,8 @@ The initial seed-2026 split-realization pipeline was checked before packaging.
   - CKD: 320 / 80.
 - All processed split tables contain zero missing values.
 - Every train/test index pair is disjoint.
-- No seed-2026 supplementary test partition exactly duplicates any primary frozen test partition.
-- Mean Jaccard overlap of seed-2026 supplementary vs primary test sets:
+- No second-realization test partition exactly duplicates any primary frozen test partition.
+- Mean Jaccard overlap of second-realization vs primary test sets:
   - PIMA: 0.1143;
   - Cleveland: 0.1148;
   - CKD: 0.1117.

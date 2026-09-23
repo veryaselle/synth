@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=splitrob_final
+#SBATCH --job-name=rob2_final
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=2
 #SBATCH --mem=4G
@@ -12,4 +12,4 @@ ROBUST_ROOT="${ROBUST_ROOT:-$BENCHMARK_ROOT/robustness_split_realization}"
 cd "$BENCHMARK_ROOT"
 PY="${CORE_PY:-python}"
 SEED="${ROBUSTNESS_SEED:-2026}"
-"$PY" "$ROBUST_ROOT/finalize_split_realization.py" --seed "$SEED"
+"$PY" "$ROBUST_ROOT/finalize_second_realization.py" --seed "$SEED"

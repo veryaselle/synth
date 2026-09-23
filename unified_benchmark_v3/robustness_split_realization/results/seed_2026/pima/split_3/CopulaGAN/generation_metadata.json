@@ -1,0 +1,18 @@
+{
+  "method": "CopulaGAN",
+  "method_key": "copulagan",
+  "seed": 45,
+  "n_real_train": 614,
+  "n_synthetic": 614,
+  "synthetic_size": "1x",
+  "epochs": 300,
+  "cuda_requested": false,
+  "batch_size": 500,
+  "joblib_n_jobs": 1,
+  "generation_seconds": 26.858601093292236,
+  "sdv_version": "1.36.0",
+  "arfpy_version": null,
+  "target_prevalence_real": 0.3485342019543974,
+  "target_prevalence_synthetic": 0.4609120521172638,
+  "note": "No post-hoc clipping or arbitrary category repair is applied. Invalid category output causes failure."
+}

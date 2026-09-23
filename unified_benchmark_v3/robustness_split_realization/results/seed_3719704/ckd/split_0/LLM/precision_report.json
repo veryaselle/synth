@@ -1,0 +1,6 @@
+{
+  "checkpoint_parameter_dtype": "torch.bfloat16",
+  "master_parameter_dtype": "torch.float32",
+  "trainer_fp16": true,
+  "trainer_bf16": false
+}

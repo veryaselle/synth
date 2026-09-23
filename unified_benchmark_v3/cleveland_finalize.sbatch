@@ -8,8 +8,7 @@
 #SBATCH --error=logs/clev_final_%j.err
 
 set -eo pipefail
-BENCHMARK_ROOT="${BENCHMARK_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
-cd "$BENCHMARK_ROOT"
+cd "$SLURM_SUBMIT_DIR"
 
 PY="${CORE_PY:-python}"
 

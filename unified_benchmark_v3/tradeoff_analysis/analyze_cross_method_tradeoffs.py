@@ -42,12 +42,11 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 TRADEOFF_DIR = Path(__file__).resolve().parent
-REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
-BENCHMARK_ROOT = REPOSITORY_ROOT / "unified_benchmark_v3"
-PRIMARY_ROOT = BENCHMARK_ROOT / "results" / "main_benchmark"
-GAN_OUTPUT = BENCHMARK_ROOT / "results" / "tradeoff_analysis"
+PROJECT_ROOT = TRADEOFF_DIR.parent
+PRIMARY_ROOT = PROJECT_ROOT / "results" / "main_benchmark"
+GAN_OUTPUT = TRADEOFF_DIR / "output"
 
-OUT = BENCHMARK_ROOT / "results" / "cross_method_tradeoffs"
+OUT = TRADEOFF_DIR / "cross_method_output"
 FIG = OUT / "figures"
 OUT.mkdir(parents=True, exist_ok=True)
 FIG.mkdir(parents=True, exist_ok=True)
@@ -144,7 +143,7 @@ def load_primary_split_level() -> pd.DataFrame:
                     "candidate_id": f"{method}::frozen",
                     "config_id": "frozen",
                     "source_layer": "primary_frozen",
-                    "_path": str(f),
+                    "_path": f.relative_to(PROJECT_ROOT).as_posix(),
                 })
                 local.append(r)
 
@@ -754,7 +753,7 @@ def main():
     print("=" * 100)
     print("CROSS-METHOD TRADE-OFF ANALYSIS")
     print("=" * 100)
-    print("REPOSITORY_ROOT:", REPOSITORY_ROOT)
+    print("PROJECT_ROOT:", PROJECT_ROOT)
     print("PRIMARY_ROOT:", PRIMARY_ROOT)
     print("GAN_OUTPUT:", GAN_OUTPUT)
     print()

@@ -4,22 +4,17 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem=4G
 #SBATCH --time=00:20:00
-#SBATCH --output=logs/cross_method_%j.out
-#SBATCH --error=logs/cross_method_%j.err
 
-set -eo pipefail
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-BENCHMARK_ROOT="${BENCHMARK_ROOT:-$(cd "$SCRIPT_DIR/.." && pwd)}"
-TRADEOFF_DIR="$BENCHMARK_ROOT/tradeoff_analysis"
+PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 PY="${CORE_PY:-python}"
 
-cd "$TRADEOFF_DIR"
-
-echo "PWD=$(pwd)"
+echo "Project root=$PROJECT_ROOT"
 echo "Python=$PY"
 echo "Starting cross-method trade-off analysis..."
 
-$PY analyze_cross_method_tradeoffs.py
+"$PY" "$SCRIPT_DIR/analyze_cross_method_tradeoffs.py"
 
 echo "DONE"

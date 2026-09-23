@@ -7,7 +7,6 @@
 #SBATCH --output=logs/ckd_final_%j.out
 #SBATCH --error=logs/ckd_final_%j.err
 set -eo pipefail
-BENCHMARK_ROOT="${BENCHMARK_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
-cd "$BENCHMARK_ROOT"
+cd "$SLURM_SUBMIT_DIR"
 PY="${CORE_PY:-python}"
 $PY finalize_ckd.py --results_root results/main_benchmark --tables_out results/main_benchmark/tables --assembler assemble_main_tables.py

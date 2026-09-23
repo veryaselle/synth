@@ -1,0 +1,77 @@
+{
+  "schema": {
+    "target": "Outcome",
+    "numeric": [
+      "Pregnancies",
+      "Glucose",
+      "BloodPressure",
+      "SkinThickness",
+      "Insulin",
+      "BMI",
+      "DiabetesPedigreeFunction",
+      "Age"
+    ],
+    "categorical": []
+  },
+  "protocol": {
+    "utility": "TSTR; preprocessing fitted on synthetic training release only",
+    "fidelity": "real_train vs synthetic; PCD and JS include target",
+    "privacy_members": "real_train",
+    "privacy_controls": "real_test",
+    "mia": "class-conditional nearest-synthetic distance AUROC",
+    "aia": "target hidden; nearest-synthetic kNN; member/control normalized excess success",
+    "aia_k": 1,
+    "seed": 42
+  },
+  "utility": {
+    "auroc": 0.7908333333333333,
+    "f1": 0.6211849673624135,
+    "brier": 0.2680970538673033,
+    "n_classifiers": 4
+  },
+  "fidelity": {
+    "pcd": 0.19541387844069102,
+    "ws": 0.5005238290154543,
+    "js": 0.08075167081132432
+  },
+  "privacy": {
+    "dcr_mean": 0.29164652386448625,
+    "dcr_median": 0.27945215008312735,
+    "dcr_p05": 0.16375246480022002,
+    "dcr_min": 0.09699332193944754,
+    "real_nn_mean": 0.1759135988703975,
+    "dcr_ratio_to_real_nn": 1.6578964090169843,
+    "fraction_syn_below_real_nn_p05": 0.0,
+    "mia_auc_pooled": 0.5440209141507844,
+    "mia_auc_macro": 0.5516014403292182,
+    "mia_n": 308,
+    "aia_risk": 0.0,
+    "aia_risk_raw": -0.14035087719298253,
+    "aia_member_success": 0.577922077922078,
+    "aia_control_success": 0.6298701298701299,
+    "aia_k": 1,
+    "aia_n_members": 154,
+    "aia_n_controls": 154,
+    "aia_secret": "target",
+    "exact_duplicate_rate": 0.0,
+    "internal_duplicate_rate": 0.0
+  },
+  "main_results_row": {
+    "dataset": "pima",
+    "method": "CTGAN",
+    "synthetic_size_label": "1x",
+    "n_real_train": 614,
+    "n_real_test": 154,
+    "n_synthetic": 614,
+    "utility_auroc": 0.7908333333333333,
+    "utility_f1": 0.6211849673624135,
+    "utility_brier": 0.2680970538673033,
+    "fidelity_pcd": 0.19541387844069102,
+    "fidelity_ws": 0.5005238290154543,
+    "fidelity_js": 0.08075167081132432,
+    "privacy_dcr_mean": 0.29164652386448625,
+    "privacy_dcr_ratio": 1.6578964090169843,
+    "privacy_mia_auc": 0.5440209141507844,
+    "privacy_aia_risk": 0.0
+  }
+}

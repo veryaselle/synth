@@ -1,0 +1,11 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "stage": "real",
+  "dataset": "ckd",
+  "split_id": 0,
+  "split_realization_seed": 2026,
+  "generator_seed": 42,
+  "evaluator_seed": 42,
+  "method": "REAL",
+  "primary_policy_held_constant": true
+}

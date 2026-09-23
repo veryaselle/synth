@@ -1,16 +1,14 @@
 #!/bin/bash
 set -eo pipefail
-BENCHMARK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$BENCHMARK_ROOT"
-export BENCHMARK_ROOT
+cd "$(dirname "$0")"
 mkdir -p logs
 
-J1=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" pima_ctgan_lr5e4_b100.sbatch)
-J2=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" pima_copulagan_lr5e4_b100.sbatch)
-J3=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" cleveland_ctgan_lr5e4_b100.sbatch)
-J4=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" cleveland_copulagan_lr5e4_b100.sbatch)
-J5=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" ckd_ctgan_lr5e4_b100.sbatch)
-J6=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" ckd_copulagan_lr5e4_b100.sbatch)
+J1=$(sbatch --parsable pima_ctgan_lr5e4_b100.sbatch)
+J2=$(sbatch --parsable pima_copulagan_lr5e4_b100.sbatch)
+J3=$(sbatch --parsable cleveland_ctgan_lr5e4_b100.sbatch)
+J4=$(sbatch --parsable cleveland_copulagan_lr5e4_b100.sbatch)
+J5=$(sbatch --parsable ckd_ctgan_lr5e4_b100.sbatch)
+J6=$(sbatch --parsable ckd_copulagan_lr5e4_b100.sbatch)
 
 echo "PIMA CTGAN:        $J1"
 echo "PIMA CopulaGAN:    $J2"

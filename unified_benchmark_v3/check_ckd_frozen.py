@@ -4,9 +4,6 @@ import argparse, json
 from pathlib import Path
 import pandas as pd
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-BENCHMARK_ROOT = REPOSITORY_ROOT / "unified_benchmark_v3"
-
 EXPECTED_NUMERIC = ["age","bp","bgr","bu","sc","sod","pot","hemo","pcv","wc","rc"]
 EXPECTED_CATEGORICAL = ["sg","al","su","rbc","pc","pcc","ba","htn","dm","cad","appet","pe","ane"]
 EXPECTED_TARGET = "target"
@@ -15,8 +12,8 @@ EXPECTED_COLUMNS = EXPECTED_NUMERIC + EXPECTED_CATEGORICAL + [EXPECTED_TARGET]
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--frozen_root", default=str(BENCHMARK_ROOT / "frozen_data/ckd"))
-    p.add_argument("--results_root", default=str(BENCHMARK_ROOT / "results/main_benchmark/ckd"))
+    p.add_argument("--frozen_root", default="frozen_data/ckd")
+    p.add_argument("--results_root", default=str(Path(__file__).resolve().parent / "results" / "main_benchmark" / "ckd"))
     p.add_argument("--allow_existing_results", action="store_true")
     args = p.parse_args()
 

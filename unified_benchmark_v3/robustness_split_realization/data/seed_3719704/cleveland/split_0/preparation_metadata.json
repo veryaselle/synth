@@ -1,0 +1,39 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "realization_seed": 3719704,
+  "split_strategy": "StratifiedShuffleSplit",
+  "n_splits": 5,
+  "test_size": 0.2,
+  "split_seed": 3719704,
+  "generator_seed_policy": "unchanged from primary: 42 + split_id",
+  "evaluator_seed_policy": "unchanged from primary: 42",
+  "preprocessing": {
+    "imputation": "none; cleaned input has zero missing values"
+  },
+  "split_id": 0,
+  "n_total": 303,
+  "n_train": 242,
+  "n_test": 61,
+  "train_target_prevalence": 0.45867768595041325,
+  "test_target_prevalence": 0.45901639344262296,
+  "missing_train_processed": 0,
+  "missing_test_processed": 0,
+  "files": {
+    "real_train_raw": {
+      "path": "real_train_raw.csv",
+      "sha256": "04f5baf68737c7fff9a206dfbb201f049a52d51b17671c9ba6bc0924afc62f5c"
+    },
+    "real_test_raw": {
+      "path": "real_test_raw.csv",
+      "sha256": "741fa8b960686bac20e33210824fa9dfed79f2b72c290075c14c69a1a285736e"
+    },
+    "real_train": {
+      "path": "real_train.csv",
+      "sha256": "04f5baf68737c7fff9a206dfbb201f049a52d51b17671c9ba6bc0924afc62f5c"
+    },
+    "real_test": {
+      "path": "real_test.csv",
+      "sha256": "741fa8b960686bac20e33210824fa9dfed79f2b72c290075c14c69a1a285736e"
+    }
+  }
+}

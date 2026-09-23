@@ -11,8 +11,7 @@
 #SBATCH --error=logs/pima_great_final_s%A_%a.err
 
 set -euo pipefail
-BENCHMARK_ROOT="${BENCHMARK_ROOT:-${SLURM_SUBMIT_DIR:-$PWD}}"
-cd "$BENCHMARK_ROOT"
+cd "$SLURM_SUBMIT_DIR"
 
 export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1

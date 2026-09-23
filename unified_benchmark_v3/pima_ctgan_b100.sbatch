@@ -16,24 +16,17 @@ export OMP_NUM_THREADS=1
 export MKL_NUM_THREADS=1
 export OPENBLAS_NUM_THREADS=1
 export NUMEXPR_NUM_THREADS=1
-export TOKENIZERS_PARALLELISM=false
 
 PY="${CORE_PY:-python}"
-
 SPLIT=$SLURM_ARRAY_TASK_ID
 SEED=$((42 + SPLIT))
-
-echo "============================================================"
-echo "pima CTGAN | batch=100 | discriminator_lr=0.0002"
-echo "split=${SPLIT} seed=${SEED}"
-echo "host=$(hostname)"
-echo "============================================================"
+OUT=results/gan_sensitivity/pima/split_${SPLIT}/CTGAN_b100
 
 $PY generate_sdv_arf_safe_cpu.py \
   --method ctgan \
   --real_train frozen_data/pima/split_${SPLIT}/real_train.csv \
   --schema frozen_data/pima/split_${SPLIT}/schema.json \
-  --outdir results/gan_sensitivity/pima/split_${SPLIT}/CTGAN \
+  --outdir "$OUT" \
   --seed ${SEED} \
   --epochs 300 \
   --batch_size 100 \
@@ -41,19 +34,16 @@ $PY generate_sdv_arf_safe_cpu.py \
   --joblib_n_jobs 1 \
   --verbose
 
-echo "=== GENERATION COMPLETE ==="
-
 $PY evaluate_release.py \
   --dataset pima \
-  --method "CTGAN" \
+  --method CTGAN \
   --real_train frozen_data/pima/split_${SPLIT}/real_train.csv \
   --real_test frozen_data/pima/split_${SPLIT}/real_test.csv \
-  --synthetic results/gan_sensitivity/pima/split_${SPLIT}/CTGAN/synthetic_1x.csv \
+  --synthetic "$OUT/synthetic_1x.csv" \
   --target Outcome \
   --numeric_cols Pregnancies,Glucose,BloodPressure,SkinThickness,Insulin,BMI,DiabetesPedigreeFunction,Age \
   --aia_k 1 \
   --seed 42 \
-  --outdir results/gan_sensitivity/pima/split_${SPLIT}/CTGAN/evaluation
+  --outdir "$OUT/evaluation"
 
-echo "=== CTGAN split_${SPLIT} COMPLETE ==="
-cat results/gan_sensitivity/pima/split_${SPLIT}/CTGAN/evaluation/main_results_row.csv
+cat "$OUT/evaluation/main_results_row.csv"

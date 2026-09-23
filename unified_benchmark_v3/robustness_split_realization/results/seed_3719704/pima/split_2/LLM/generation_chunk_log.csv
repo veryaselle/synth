@@ -1,0 +1,5 @@
+target,chunk_index,attempt,requested_rows,accepted_rows,rejected_rows,status,seconds,peak_gpu_memory_gb,path
+0,0,0,250,249,1,RESAMPLED,108.25934529304504,4.82,/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/robustness_split_realization/results/seed_3719704/pima/split_2/LLM/raw_attempts/target_0/chunk_0000_attempt_000.csv
+0,0,1,1,1,0,OK,15.149905920028687,1.485,/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/robustness_split_realization/results/seed_3719704/pima/split_2/LLM/raw_attempts/target_0/chunk_0000_attempt_001.csv
+0,1,0,150,150,0,OK,86.5390055179596,4.82,/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/robustness_split_realization/results/seed_3719704/pima/split_2/LLM/raw_attempts/target_0/chunk_0001_attempt_000.csv
+1,0,0,214,214,0,OK,108.05009508132935,4.82,/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/robustness_split_realization/results/seed_3719704/pima/split_2/LLM/raw_attempts/target_1/chunk_0000_attempt_000.csv

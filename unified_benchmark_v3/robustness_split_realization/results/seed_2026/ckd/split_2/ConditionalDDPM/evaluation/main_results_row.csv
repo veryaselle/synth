@@ -1,0 +1,2 @@
+dataset,method,synthetic_size_label,n_real_train,n_real_test,n_synthetic,utility_auroc,utility_f1,utility_brier,fidelity_pcd,fidelity_ws,fidelity_js,privacy_dcr_mean,privacy_dcr_ratio,privacy_mia_auc,privacy_aia_risk
+ckd,Conditional DDPM,1x,320,80,320,0.9981666666666666,0.9636479591836735,0.040560383991533944,0.10053593703901882,0.2427253198318895,0.051291656908393456,1.2523240106267515,1.174570993042972,0.5301562499999999,0.0

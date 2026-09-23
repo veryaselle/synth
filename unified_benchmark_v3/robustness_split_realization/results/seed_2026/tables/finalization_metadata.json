@@ -1,0 +1,9 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "realization_seed": 2026,
+  "validated_split_level_rows": 120,
+  "validated_dataset_method_cells": 24,
+  "expected": "3 datasets x 8 training sources x 5 splits = 120 rows",
+  "primary_benchmark_replaced": false,
+  "realization_manifest": "/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/robustness_split_realization/data/seed_2026/realization_manifest.json"
+}

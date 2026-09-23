@@ -1,0 +1,26 @@
+PIMA unified benchmark — FINAL
+
+Frozen splits: 5
+Synthetic release size: 1x
+Methods:
+REAL
+TVAE
+CTGAN
+CopulaGAN
+ARF
+Gaussian Copula
+Conditional DDPM
+LLM
+
+LLM:
+GReaT/Qwen3-0.3B-distil
+10 epochs
+target-conditioned generation
+saved 10-epoch models reused for final generation
+catastrophic numeric outputs rejected and resampled
+no clipping or manual numerical repair
+moderate support extrapolation retained
+
+Old unconstrained LLM outputs retained separately for audit/robustness analysis.
+
+Do not modify PIMA generator configurations based on these final test results.

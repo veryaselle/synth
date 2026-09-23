@@ -236,17 +236,25 @@ def filter_and_restore_rows(
             invalid |= catastrophic
         numeric_converted[col] = vals
 
-    # Categorical support is a schema-validity constraint, not a projection.
-    categorical_converted: Dict[str, pd.Series] = {}
+
+
+    # changed: Categorical support is a schema-validity constraint, not a projection.
+    # Keep raw string tokens here; restore values only after all invalid rows
+    # have been removed. This avoids NaN-induced integer -> float upcasting.
+    categorical_tokens: Dict[str, pd.Series] = {}
+
     for col in categorical:
         raw_tokens = work[col].astype(str)
         mapping = restore[col]
+
         bad_cat = ~raw_tokens.isin(set(mapping))
+
         if bad_cat.any():
             reasons["unseen_category"] += int(bad_cat.sum())
             feature_reasons[f"{col}:unseen_category"] += int(bad_cat.sum())
             invalid |= bad_cat
-        categorical_converted[col] = raw_tokens.map(mapping)
+
+        categorical_tokens[col] = raw_tokens # eoc
 
     rejected = raw.loc[invalid].copy()
     if len(rejected):
@@ -257,8 +265,17 @@ def filter_and_restore_rows(
         accepted[target] = y_int[~invalid.to_numpy()]
         for col in numeric:
             accepted[col] = numeric_converted[col].loc[~invalid].to_numpy()
+        # changed
         for col in categorical:
-            accepted[col] = categorical_converted[col].loc[~invalid].to_numpy()
+            restored = categorical_tokens[col].loc[~invalid].map(restore[col])
+
+            if restored.isna().any():
+                raise RuntimeError(
+                    f"Internal error: accepted categorical column '{col}' "
+                    "could not be restored exactly"
+                )  
+
+            accepted[col] = restored.to_numpy() # eoc
 
     if accepted.isna().any().any():
         raise RuntimeError("Internal error: accepted rows contain missing values")
@@ -307,7 +324,7 @@ def validate_existing_chunk(
         return False
     try:
         chunk = pd.read_csv(path)
-        validate_complete_chunk(
+        validate_restored_chunk(  # changed from complete to restored
             chunk,
             train=train,
             schema=schema,
@@ -319,6 +336,71 @@ def validate_existing_chunk(
         return True
     except Exception:
         return False
+
+
+
+# new fix 12.08
+def validate_restored_chunk(
+    df,
+    *,
+    train,
+    schema,
+    restore,
+    target_value,
+    expected_rows,
+    catastrophic_thresholds,
+):
+    if len(df) != expected_rows:
+        raise ValueError(
+            f"Generated {len(df)} rows, expected {expected_rows}"
+        )
+
+    expected = list(train.columns)
+
+    if list(df.columns) != expected:
+        raise ValueError("Restored chunk column mismatch")
+
+    if df.isna().any().any():
+        raise ValueError("Restored chunk contains missing values")
+
+    work = df.copy()
+
+    # target
+    y = pd.to_numeric(work[schema["target"]], errors="coerce")
+    if y.isna().any() or not (y.astype(int) == target_value).all():
+        raise ValueError("Restored chunk target mismatch")
+
+    # numeric
+    for col in schema["numeric"]:
+        vals = pd.to_numeric(work[col], errors="coerce")
+
+        if vals.isna().any() or not np.isfinite(vals.to_numpy(float)).all():
+            raise ValueError(f"Invalid restored numeric column: {col}")
+
+        if (
+            np.abs(vals.to_numpy(float))
+            > catastrophic_thresholds[col]
+        ).any():
+            raise ValueError(
+                f"Catastrophic restored numeric values: {col}"
+            )
+
+    # categorical: compare against ORIGINAL values,
+    # not GReaT string tokens
+    for col in schema["categorical"]:
+        allowed = list(restore[col].values())
+
+        if not work[col].isin(allowed).all():
+            raise ValueError(
+                f"Restored categorical outside support: {col}"
+            )
+
+    return work.reset_index(drop=True)
+
+
+
+
+    
 
 
 def generate_class_chunks(
@@ -464,7 +546,7 @@ def generate_class_chunks(
             torch.cuda.empty_cache()
 
         validated = pd.concat(accepted_parts, ignore_index=True).iloc[:expected_rows].copy()
-        validated = validate_complete_chunk(
+        validated = validate_restored_chunk(  # fix from validated = validate_complete_chunk( to validated = validate_restored_chunk(
             validated,
             train=train,
             schema=schema,
@@ -753,7 +835,7 @@ def main() -> None:
             == target_value
         ].copy()
         expected_n = negative_n if target_value == 0 else positive_n
-        part = validate_complete_chunk(
+        part = validate_restored_chunk( # changed from complete to restored
             part,
             train=train,
             schema=schema,

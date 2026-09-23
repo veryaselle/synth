@@ -1,0 +1,11 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "realization_seed": 2026,
+  "primary_source": "unrounded primary numeric summary",
+  "primary_summary": "/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/results/main_benchmark/tables/main_results_summary_numeric.csv",
+  "robust_summary": "/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/robustness_split_realization/results/seed_2026/tables/main_results_summary_numeric.csv",
+  "mean_metric_rank_spearman": 0.8065476190476192,
+  "median_metric_rank_spearman": 0.8750000000000001,
+  "dimension_leader_agreement_fraction": 0.3888888888888889,
+  "interpretation_note": "This experiment probes robustness to a second independently shuffled split realization. It does not replace the primary frozen benchmark and does not fully isolate generator stochasticity. Metric-level rank agreement may use thesis-reported rounded means when the unrounded primary summary is unavailable; stored primary strategy selections are used for dimension-leader comparison when present."
+}

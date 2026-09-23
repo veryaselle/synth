@@ -1,0 +1,18 @@
+{
+  "method": "CTGAN",
+  "method_key": "ctgan",
+  "seed": 44,
+  "n_real_train": 242,
+  "n_synthetic": 242,
+  "synthetic_size": "1x",
+  "epochs": 300,
+  "cuda_requested": false,
+  "batch_size": 500,
+  "joblib_n_jobs": 1,
+  "generation_seconds": 21.96860408782959,
+  "sdv_version": "1.36.0",
+  "arfpy_version": "0.1.1",
+  "target_prevalence_real": 0.45867768595041325,
+  "target_prevalence_synthetic": 0.4380165289256198,
+  "note": "No post-hoc clipping or arbitrary category repair is applied. Invalid category output causes failure."
+}

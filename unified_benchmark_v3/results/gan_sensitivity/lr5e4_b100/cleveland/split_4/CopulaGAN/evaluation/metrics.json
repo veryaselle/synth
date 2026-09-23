@@ -1,0 +1,83 @@
+{
+  "schema": {
+    "target": "target",
+    "numeric": [
+      "age",
+      "trestbps",
+      "chol",
+      "thalach",
+      "oldpeak"
+    ],
+    "categorical": [
+      "sex",
+      "cp",
+      "fbs",
+      "restecg",
+      "exang",
+      "slope",
+      "ca",
+      "thal"
+    ]
+  },
+  "protocol": {
+    "utility": "TSTR; preprocessing fitted on synthetic training release only",
+    "fidelity": "real_train vs synthetic; PCD and JS include target",
+    "privacy_members": "real_train",
+    "privacy_controls": "real_test",
+    "mia": "class-conditional nearest-synthetic distance AUROC",
+    "aia": "target hidden; nearest-synthetic kNN; member/control normalized excess success",
+    "aia_k": 1,
+    "seed": 42
+  },
+  "utility": {
+    "auroc": 0.5367965367965368,
+    "f1": 0.3355841866711432,
+    "brier": 0.3211295149478858,
+    "n_classifiers": 4
+  },
+  "fidelity": {
+    "pcd": 0.13304092642800658,
+    "ws": 0.8407306268053869,
+    "js": 0.06928403239874303
+  },
+  "privacy": {
+    "dcr_mean": 1.348277009653475,
+    "dcr_median": 1.5131912859423895,
+    "dcr_p05": 0.45892529540180693,
+    "dcr_min": 0.15607158780135214,
+    "real_nn_mean": 0.9033426694477572,
+    "dcr_ratio_to_real_nn": 1.4925421495673628,
+    "fraction_syn_below_real_nn_p05": 0.004132231404958678,
+    "mia_auc_pooled": 0.4934157484547165,
+    "mia_auc_macro": 0.5043114353179289,
+    "mia_n": 122,
+    "aia_risk": 0.0,
+    "aia_risk_raw": -0.2666666666666667,
+    "aia_member_success": 0.3770491803278688,
+    "aia_control_success": 0.5081967213114754,
+    "aia_k": 1,
+    "aia_n_members": 61,
+    "aia_n_controls": 61,
+    "aia_secret": "target",
+    "exact_duplicate_rate": 0.0,
+    "internal_duplicate_rate": 0.0
+  },
+  "main_results_row": {
+    "dataset": "cleveland",
+    "method": "CopulaGAN",
+    "synthetic_size_label": "1x",
+    "n_real_train": 242,
+    "n_real_test": 61,
+    "n_synthetic": 242,
+    "utility_auroc": 0.5367965367965368,
+    "utility_f1": 0.3355841866711432,
+    "utility_brier": 0.3211295149478858,
+    "fidelity_pcd": 0.13304092642800658,
+    "fidelity_ws": 0.8407306268053869,
+    "fidelity_js": 0.06928403239874303,
+    "privacy_dcr_mean": 1.348277009653475,
+    "privacy_dcr_ratio": 1.4925421495673628,
+    "privacy_mia_auc": 0.4934157484547165,
+    "privacy_aia_risk": 0.0
+  }
+}

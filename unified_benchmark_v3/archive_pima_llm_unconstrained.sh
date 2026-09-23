@@ -1,8 +1,6 @@
 #!/bin/bash
 set -euo pipefail
 
-BENCHMARK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$BENCHMARK_ROOT"
 ROOT="results/main_benchmark/pima"
 LLM_PY="${LLM_PY:-python}"
 

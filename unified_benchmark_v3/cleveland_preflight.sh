@@ -1,7 +1,6 @@
 #!/bin/bash
 set -eo pipefail
-BENCHMARK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$BENCHMARK_ROOT"
+cd "$(dirname "$0")"
 
 CORE_PY="${CORE_PY:-python}"
 LLM_PY="${LLM_PY:-python}"
@@ -30,7 +29,7 @@ for METHOD in tvae ctgan copulagan gaussian_copula arf; do
     --method "$METHOD" \
     --real_train frozen_data/cleveland/split_0/real_train.csv \
     --schema frozen_data/cleveland/split_0/schema.json \
-    --outdir ${TMPDIR:-/tmp}/cleveland_dry_${METHOD} \
+    --outdir /tmp/cleveland_dry_${METHOD} \
     --seed 42 \
     --dry_run
 done
@@ -40,7 +39,7 @@ echo "=== DDPM DRY RUN ==="
 $CORE_PY generate_conditional_ddpm.py \
   --real_train frozen_data/cleveland/split_0/real_train.csv \
   --schema frozen_data/cleveland/split_0/schema.json \
-  --outdir ${TMPDIR:-/tmp}/cleveland_dry_ddpm \
+  --outdir /tmp/cleveland_dry_ddpm \
   --seed 42 \
   --device cpu \
   --dry_run
@@ -50,7 +49,7 @@ echo "=== LLM DRY RUN ==="
 $LLM_PY generate_great_llm_final.py \
   --real_train frozen_data/cleveland/split_0/real_train.csv \
   --schema frozen_data/cleveland/split_0/schema.json \
-  --outdir ${TMPDIR:-/tmp}/cleveland_dry_llm \
+  --outdir /tmp/cleveland_dry_llm \
   --seed 42 \
   --epochs 10 \
   --catastrophic_numeric_factor 100 \

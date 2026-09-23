@@ -1,0 +1,25 @@
+Cleveland Heart Disease unified benchmark
+Freeze version: cleveland_v1
+
+Protocol:
+- 5 frozen stratified train/test splits
+- split seed: 42
+- primary synthetic size: 1x
+- 8 methods:
+  REAL
+  TVAE
+  CTGAN
+  CopulaGAN
+  ARF
+  Gaussian Copula
+  Conditional DDPM
+  LLM
+- exactly 40 primary split-level result rows
+- utility: AUROC, F1, Brier
+- fidelity: PCD, Wasserstein, Jensen-Shannon
+- privacy audits: DCR, MIA AUROC, AIA risk
+
+Final Cleveland benchmark completed successfully with 5/5 splits for every method.
+
+Do not modify this directory.
+Any future Cleveland experiments must use a new freeze version.

@@ -1,0 +1,25 @@
+dataset,method,n_rows,n_splits
+ckd,ARF,5,5
+ckd,CTGAN,5,5
+ckd,Conditional DDPM,5,5
+ckd,CopulaGAN,5,5
+ckd,Gaussian Copula,5,5
+ckd,LLM,5,5
+ckd,REAL,5,5
+ckd,TVAE,5,5
+cleveland,ARF,5,5
+cleveland,CTGAN,5,5
+cleveland,Conditional DDPM,5,5
+cleveland,CopulaGAN,5,5
+cleveland,Gaussian Copula,5,5
+cleveland,LLM,5,5
+cleveland,REAL,5,5
+cleveland,TVAE,5,5
+pima,ARF,5,5
+pima,CTGAN,5,5
+pima,Conditional DDPM,5,5
+pima,CopulaGAN,5,5
+pima,Gaussian Copula,5,5
+pima,LLM,5,5
+pima,REAL,5,5
+pima,TVAE,5,5

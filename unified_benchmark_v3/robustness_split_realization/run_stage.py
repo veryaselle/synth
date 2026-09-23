@@ -29,7 +29,7 @@ METHODS: Dict[str, tuple[str, str]] = {
 
 
 def _python(external_name: str, fallback: str) -> str:
-    return os.environ.get(external_name) or fallback
+    return os.environ.get(external_name, fallback)
 
 
 def _csv_arg(values: List[str]) -> str:
@@ -125,7 +125,7 @@ def main() -> None:
     for path in [real_train, real_test, schema_path]:
         if not path.exists():
             raise FileNotFoundError(
-                f"Missing split-realization input {path}. Run prepare_split_realization.py first."
+                f"Missing second-realization input {path}. Run prepare_second_realization.py first."
             )
 
     schema = json.loads(schema_path.read_text(encoding="utf-8"))

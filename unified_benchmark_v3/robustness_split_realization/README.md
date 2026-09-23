@@ -1,75 +1,55 @@
-# Independent split-realization robustness checks
+# Independent split-realization robustness check
 
-This directory contains **supplementary robustness analyses** for the thesis benchmark. They do **not** replace, modify, or pool with the frozen primary benchmark.
+This directory contains a **supplementary robustness experiment** for the thesis benchmark.
+It does **not** replace or modify the frozen primary benchmark.
 
 ## Scientific question
 
-The primary benchmark uses five frozen train/test partitions per dataset. These checks ask:
+The primary benchmark uses five frozen train/test partitions per dataset. This check asks:
 
-> Are the main generator rankings and dimension-level conclusions preserved under independently shuffled realizations of the train/test partitions?
+> Are the main generator rankings and dimension-level conclusions preserved under a second, independently shuffled realization of the train/test partitions?
 
-The planned intervention in each robustness run is the **partition realization**. Everything else in the benchmark contract is held fixed.
+The only planned intervention is the **partition realization**.
 
-The thesis robustness evidence currently uses two supplementary realization seeds:
+- Second-realization seed: **2026**.
+- PIMA: five stratified `train_test_split` calls with seeds **2026–2030**, mirroring the primary PIMA convention of five explicit split seeds.
+- Cleveland / CKD: `StratifiedShuffleSplit(n_splits=5, test_size=0.2, random_state=2026)`, mirroring the primary splitter type.
+- Generator seed schedule remains **42 + split_id**.
+- Evaluator seed remains **42**.
+- Release size remains **1x**.
+- Generator hyperparameters and evaluation code remain the same as in the frozen primary benchmark.
 
-- `2026` — initial supplementary split-realization check;
-- `3719704` — additional independent split-realization sensitivity check.
+The predeclared design is also stored in `experiment_config.json`.
 
-The second seed was added as further sensitivity evidence; neither supplementary realization replaces the frozen primary benchmark.
+## Why this is separate from generator stochasticity
 
-For an arbitrary realization seed `S`:
+Changing train/test partitions and changing generator seeds in one intervention would make the source of any change ambiguous. Therefore this experiment changes the partition realization while preserving the primary generator-seed schedule. Retraining stochastic models can still contribute residual numerical/run variation, so this check should be interpreted as **split-realization robustness**, not as a complete multi-seed generator-stochasticity study.
 
-- PIMA uses five stratified `train_test_split` calls with seeds `S, S+1, ..., S+4`, mirroring the primary PIMA convention of five explicit split seeds;
-- Cleveland and CKD use `StratifiedShuffleSplit(n_splits=5, test_size=0.2, random_state=S)`, mirroring the primary splitter type;
-- generator seed schedule remains `42 + split_id`;
-- evaluator seed remains `42`;
-- release size remains `1x`;
-- frozen generator hyperparameters and evaluation code remain unchanged.
-
-The recorded design is stored in `experiment_config.json`.
-
-## Why generator seeds are not changed here
-
-Changing the train/test partitions and generator training seeds in the same intervention would confound two sources of variation. Therefore these checks vary the partition realization while preserving the primary generator-seed schedule.
-
-Retraining stochastic generators can still contribute residual run or numerical variation. These experiments should therefore be interpreted as **split-realization robustness checks**, not as a complete repeated-generator-seed study.
-
-## Environment setup
-
-For the full HPC run, explicitly resolve the core and LLM Python interpreters whenever the benchmark uses separate environments:
-
-```bash
-export CORE_PY="$(conda run -n synthetic-medical-core python -c 'import sys; print(sys.executable)')"
-export LLM_PY="$(conda run -n synthetic-medical-llm311 python -c 'import sys; print(sys.executable)')"
-```
-
-`preflight.sh` validates the required imports before any Slurm arrays are submitted. `submit_all.sh` also resolves empty interpreter variables to a real fallback, preventing an empty `CORE_PY` or `LLM_PY` from being propagated to jobs.
-
-## Run one supplementary realization
+## One-command HPC run
 
 From `unified_benchmark_v3`:
 
 ```bash
-export ROBUSTNESS_SEED=2026
 bash robustness_split_realization/submit_all.sh
 ```
 
-For the additional realization used in the thesis robustness analysis:
+Optional explicit interpreters:
 
 ```bash
-export ROBUSTNESS_SEED=3719704
+export CORE_PY=/path/to/core/env/bin/python
+export LLM_PY=/path/to/llm/env/bin/python
 bash robustness_split_realization/submit_all.sh
 ```
 
-`submit_all.sh` runs the preflight and then submits:
+`submit_all.sh` first runs a preflight and prepares the second realization, then submits:
 
 - 15 REAL-reference tasks;
-- 75 SDV/ARF tasks (`3 datasets × 5 methods × 5 splits`);
+- 75 SDV/ARF tasks (3 datasets × 5 methods × 5 splits);
 - 15 Conditional-DDPM tasks;
 - 15 GReaT-style LLM tasks;
-- one strict finalization/comparison job with an `afterok` dependency on all four groups.
+- one strict finalization/comparison job.
 
-Total expected final inventory for **each** realization:
+Total expected final inventory:
 
 ```text
 3 datasets × 8 training sources × 5 splits = 120 split-level rows
@@ -77,10 +57,8 @@ Total expected final inventory for **each** realization:
 
 ## Prepared data
 
-Each realization has its own deterministic data directory:
-
 ```text
-robustness_split_realization/data/seed_<SEED>/
+robustness_split_realization/data/seed_2026/
   pima/split_0 ... split_4
   cleveland/split_0 ... split_4
   ckd/split_0 ... split_4
@@ -88,26 +66,23 @@ robustness_split_realization/data/seed_<SEED>/
   split_overlap_with_primary.csv
 ```
 
-Regenerate one realization explicitly with:
+The preparation script checks train/test sizes, absence of processed missing values, train/test index disjointness and verifies that no second-realization test partition exactly duplicates a primary frozen test partition.
+
+Regenerate deterministically with:
 
 ```bash
-python robustness_split_realization/prepare_split_realization.py --seed 2026
-python robustness_split_realization/prepare_split_realization.py --seed 3719704
+python robustness_split_realization/prepare_second_realization.py --seed 2026
 ```
 
-The preparation script checks expected train/test sizes, absence of processed missing values, train/test index disjointness, and whether a supplementary test partition exactly duplicates any primary frozen test partition.
+## Results and comparison
 
-`prepare_second_realization.py` is retained only as a backward-compatible wrapper for older commands.
-
-## Per-realization finalization and comparison
-
-After a successful HPC run, outputs are stored separately under:
+After a successful HPC run:
 
 ```text
-robustness_split_realization/results/seed_<SEED>/tables/
+robustness_split_realization/results/seed_2026/tables/
 ```
 
-The finalizer validates an exact `120`-row split-level inventory before aggregation. The corresponding primary-comparison directory contains:
+contains the same mean/SD tables as the primary benchmark plus:
 
 ```text
 primary_comparison/
@@ -120,55 +95,22 @@ primary_comparison/
   SUMMARY.md
 ```
 
-`compare_with_primary.py` compares each supplementary realization with the unrounded primary numeric summary when available. If the unrounded primary summary is unavailable, it falls back to the thesis-reported rounded means and records that source explicitly.
+`compare_with_primary.py` compares the second realization with the unrounded primary numeric summary if it exists locally. Otherwise it falls back to the thesis-reported rounded means in `results/final_thesis/reported_primary_means.csv`; in that fallback mode, exact rank ties can reflect three-decimal reporting precision.
 
-At metric level it reports primary-vs-supplementary means, deltas, ranks, rank changes, and Spearman rank agreement for:
+### What is compared
+
+At metric level, the script reports primary vs second-realization means, deltas, ranks and Spearman rank agreement for:
 
 - utility: AUROC, F1, Brier;
-- fidelity: PCD, normalized Wasserstein distance, JS divergence;
+- fidelity: PCD, WS, JS;
 - empirical privacy-related risk: `|MIA AUROC - 0.5|` and AIA risk.
 
-DCR remains descriptive and is not assigned a universal favourable direction.
+DCR remains descriptive and is not given a universal favourable direction.
 
-At dimension level the script recomputes the thesis-style within-dataset min-max and rank scores for utility, fidelity, and empirical privacy-related risk, then records whether the dimension leader is unchanged.
+At dimension level, it also recomputes the thesis-style within-dataset **min-max** and **rank** scores for utility, fidelity and empirical privacy-related risk and reports whether the leading candidate is unchanged.
 
-## Cross-realization summary
+## Interpretation
 
-Once both supplementary realizations have been finalized, summarize them without pooling their split-level rows:
+A stable ordering strengthens the claim that a finding is not specific to the original partition realization. A changed ordering is also scientifically useful: it identifies conclusions that are sensitive to how a small medical dataset is partitioned.
 
-```bash
-python robustness_split_realization/aggregate_realizations.py \
-  --seeds 2026 3719704
-```
-
-The script validates that both runs contain the expected metric, leader, and AUROC-retention inventories and that they use a consistent primary reference. It writes:
-
-```text
-robustness_split_realization/results/across_realizations/
-  realization_overview.csv
-  rank_agreement_by_dataset_dimension.csv
-  rank_agreement_by_dimension.csv
-  dimension_leader_cross_realization.csv
-  metric_leader_cross_realization.csv
-  auroc_retention_all_realizations.csv
-  auroc_retention_summary.csv
-  cross_realization_summary.json
-  SUMMARY.md
-```
-
-The cross-realization analysis distinguishes two questions:
-
-1. **Rank-structure stability:** whether the broader ordering of methods remains similar to the frozen primary benchmark, summarized with Spearman agreement.
-2. **Winner stability:** whether the exact metric- or dimension-level leader remains the same. A changed leader is informative and should not be treated as an experimental failure.
-
-## Slurm path handling
-
-Slurm executes a copied batch script from its spool directory (for example, `/var/spool/slurmd/job...`). Therefore `.sbatch` files do not derive the repository path from `BASH_SOURCE[0]`.
-
-`submit_all.sh` exports absolute `BENCHMARK_ROOT` and `ROBUST_ROOT` values and submits every job with `--chdir="$BENCHMARK_ROOT"`. Batch scripts use these exported paths and fall back to `SLURM_SUBMIT_DIR` only if needed.
-
-## Interpretation boundary
-
-The frozen primary benchmark remains the confirmatory reference. Supplementary realizations are reported separately and are **not pooled into a 10-split or 15-split primary benchmark**.
-
-Stable rankings strengthen the claim that a finding is not specific to one partition realization. Changed rankings or leaders identify partition-sensitive conclusions. Because generator training seeds are not independently repeated here, generator stochasticity remains a separate limitation.
+The primary frozen benchmark remains the thesis reference. The second realization is supplementary robustness evidence and should be reported separately rather than pooled into a new ten-split primary benchmark.

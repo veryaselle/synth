@@ -21,9 +21,6 @@ import argparse
 import hashlib
 import json
 from pathlib import Path
-
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-BENCHMARK_ROOT = REPOSITORY_ROOT / "unified_benchmark_v3"
 from typing import Dict, List, Tuple
 
 import numpy as np
@@ -248,10 +245,10 @@ def prepare_ckd(path: Path, out_root: Path) -> None:
 
 def main() -> None:
     p = argparse.ArgumentParser()
-    p.add_argument("--pima", default=str(REPOSITORY_ROOT / "data/raw/pima/pima.csv"))
-    p.add_argument("--cleveland", default=str(REPOSITORY_ROOT / "data/raw/cleveland/Heart_disease_cleveland_new.csv"))
-    p.add_argument("--ckd", default=str(REPOSITORY_ROOT / "data/processed/ckd/kidney_disease_sanitized.csv"))
-    p.add_argument("--out_root", default=str(BENCHMARK_ROOT / "frozen_data"))
+    p.add_argument("--pima", default=str(Path(__file__).resolve().parent / "data" / "pima.csv"))
+    p.add_argument("--cleveland", default=str(Path(__file__).resolve().parent / "data" / "Heart_disease_cleveland_new.csv"))
+    p.add_argument("--ckd", default=str(Path(__file__).resolve().parent / "data" / "kidney_disease_sanitized.csv"))
+    p.add_argument("--out_root", default=str(Path(__file__).resolve().parent / "frozen_data"))
     args = p.parse_args()
     out_root = Path(args.out_root)
     out_root.mkdir(parents=True, exist_ok=True)

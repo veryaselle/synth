@@ -1,0 +1,11 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "stage": "llm",
+  "dataset": "pima",
+  "split_id": 4,
+  "split_realization_seed": 3719704,
+  "generator_seed": 46,
+  "evaluator_seed": 42,
+  "method": "LLM",
+  "primary_policy_held_constant": true
+}

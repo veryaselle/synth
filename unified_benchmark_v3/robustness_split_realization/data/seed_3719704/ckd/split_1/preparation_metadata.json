@@ -1,0 +1,68 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "realization_seed": 3719704,
+  "split_strategy": "StratifiedShuffleSplit",
+  "n_splits": 5,
+  "test_size": 0.2,
+  "split_seed": 3719704,
+  "generator_seed_policy": "unchanged from primary: 42 + split_id",
+  "evaluator_seed_policy": "unchanged from primary: 42",
+  "preprocessing": {
+    "numeric_imputation": "training-split median",
+    "categorical_imputation": "training-split mode",
+    "numeric_fill_values": {
+      "age": 55.0,
+      "bp": 80.0,
+      "bgr": 120.0,
+      "bu": 42.0,
+      "sc": 1.3,
+      "sod": 138.0,
+      "pot": 4.4,
+      "hemo": 12.850000000000001,
+      "pcv": 40.0,
+      "wc": 8100.0,
+      "rc": 4.8
+    },
+    "categorical_fill_values": {
+      "sg": 1.02,
+      "al": 0.0,
+      "su": 0.0,
+      "rbc": "normal",
+      "pc": "normal",
+      "pcc": "notpresent",
+      "ba": "notpresent",
+      "htn": "no",
+      "dm": "no",
+      "cad": "no",
+      "appet": "good",
+      "pe": "no",
+      "ane": "no"
+    }
+  },
+  "split_id": 1,
+  "n_total": 400,
+  "n_train": 320,
+  "n_test": 80,
+  "train_target_prevalence": 0.625,
+  "test_target_prevalence": 0.625,
+  "missing_train_processed": 0,
+  "missing_test_processed": 0,
+  "files": {
+    "real_train_raw": {
+      "path": "real_train_raw.csv",
+      "sha256": "7734c5edb95c0ab9b741a228c2d6d91144d023c33fe863e0ad56908ddec98371"
+    },
+    "real_test_raw": {
+      "path": "real_test_raw.csv",
+      "sha256": "dd076ff61adc5519eac22d39c499d81e433107f9ed88a62b97b7c85047d54072"
+    },
+    "real_train": {
+      "path": "real_train.csv",
+      "sha256": "5fe294e715ca0c0a427a0e95e653a756743c9995d4087d4141dc26e65d42ec21"
+    },
+    "real_test": {
+      "path": "real_test.csv",
+      "sha256": "dbcab928f32de0f9cc14d6610141ef57373fbd7ef006e897bea8be0bfdba375a"
+    }
+  }
+}

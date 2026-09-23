@@ -1,8 +1,6 @@
 #!/bin/bash
 set -eo pipefail
-BENCHMARK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$BENCHMARK_ROOT"
-export BENCHMARK_ROOT
+cd "$(dirname "$0")"
 mkdir -p logs
 
 echo "Running Cleveland preflight..."
@@ -10,13 +8,13 @@ bash cleveland_preflight.sh
 
 echo
 echo "Submitting Cleveland benchmark..."
-REAL_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" cleveland_real_reference.sbatch)
-SDV_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" cleveland_sdv_arf.sbatch)
-DDPM_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" cleveland_conditional_ddpm.sbatch)
-LLM_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" cleveland_great_llm.sbatch)
+REAL_JOB=$(sbatch --parsable cleveland_real_reference.sbatch)
+SDV_JOB=$(sbatch --parsable cleveland_sdv_arf.sbatch)
+DDPM_JOB=$(sbatch --parsable cleveland_conditional_ddpm.sbatch)
+LLM_JOB=$(sbatch --parsable cleveland_great_llm.sbatch)
 
-FINAL_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" \
-  --dependency=afterok:${REAL_JOB}:${SDV_JOB}:${DDPM_JOB}:${LLM_JOB} \
+FINAL_JOB=$(sbatch --parsable \
+  --dependency=afterany:${REAL_JOB}:${SDV_JOB}:${DDPM_JOB}:${LLM_JOB} \
   cleveland_finalize.sbatch)
 
 echo

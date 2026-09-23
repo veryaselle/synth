@@ -5,9 +5,6 @@ import json
 from pathlib import Path
 import pandas as pd
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-BENCHMARK_ROOT = REPOSITORY_ROOT / "unified_benchmark_v3"
-
 EXPECTED_NUMERIC = ["age", "trestbps", "chol", "thalach", "oldpeak"]
 EXPECTED_CATEGORICAL = ["sex", "cp", "fbs", "restecg", "exang", "slope", "ca", "thal"]
 EXPECTED_TARGET = "target"
@@ -18,8 +15,8 @@ EXPECTED_COLUMNS = [
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--frozen_root", default=str(BENCHMARK_ROOT / "frozen_data/cleveland"))
-    p.add_argument("--results_root", default=str(BENCHMARK_ROOT / "results/main_benchmark/cleveland"))
+    p.add_argument("--frozen_root", default="frozen_data/cleveland")
+    p.add_argument("--results_root", default=str(Path(__file__).resolve().parent / "results" / "main_benchmark" / "cleveland"))
     p.add_argument("--allow_existing_results", action="store_true")
     args = p.parse_args()
 

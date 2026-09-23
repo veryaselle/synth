@@ -1,0 +1,11 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "stage": "ddpm",
+  "dataset": "cleveland",
+  "split_id": 1,
+  "split_realization_seed": 3719704,
+  "generator_seed": 43,
+  "evaluator_seed": 42,
+  "method": "Conditional DDPM",
+  "primary_policy_held_constant": true
+}

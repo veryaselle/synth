@@ -1,0 +1,2 @@
+dataset,method,synthetic_size_label,n_real_train,n_real_test,n_synthetic,utility_auroc,utility_f1,utility_brier,fidelity_pcd,fidelity_ws,fidelity_js,privacy_dcr_mean,privacy_dcr_ratio,privacy_mia_auc,privacy_aia_risk
+pima,Gaussian Copula,1x,614,154,614,0.7295370370370371,0.47140104233446717,0.2159213924017968,0.09780164819585974,0.15468211770046025,0.021931120344949158,0.18530784730363897,1.0861923501023398,0.466014504975544,0.0

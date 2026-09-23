@@ -1,0 +1,19 @@
+dataset,dimension,scoring_scheme,primary_leader,robust_leader,same_leader
+pima,utility,minmax,LLM,TVAE,False
+pima,utility,rank,LLM / TVAE,TVAE,False
+pima,fidelity,minmax,ARF,ARF,True
+pima,fidelity,rank,ARF / Conditional DDPM,ARF,False
+pima,privacy,minmax,CTGAN,Gaussian Copula,False
+pima,privacy,rank,CTGAN,Gaussian Copula,False
+cleveland,utility,minmax,Conditional DDPM,Conditional DDPM,True
+cleveland,utility,rank,Conditional DDPM,Conditional DDPM,True
+cleveland,fidelity,minmax,ARF,ARF,True
+cleveland,fidelity,rank,ARF,ARF,True
+cleveland,privacy,minmax,CopulaGAN,CTGAN,False
+cleveland,privacy,rank,CopulaGAN,CTGAN,False
+ckd,utility,minmax,ARF,LLM,False
+ckd,utility,rank,ARF,LLM,False
+ckd,fidelity,minmax,ARF,ARF,True
+ckd,fidelity,rank,ARF,ARF,True
+ckd,privacy,minmax,Gaussian Copula,CopulaGAN,False
+ckd,privacy,rank,Gaussian Copula,CopulaGAN,False

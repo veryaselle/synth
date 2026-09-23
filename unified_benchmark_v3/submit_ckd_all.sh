@@ -1,8 +1,6 @@
 #!/bin/bash
 set -eo pipefail
-BENCHMARK_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-cd "$BENCHMARK_ROOT"
-export BENCHMARK_ROOT
+cd "$(dirname "$0")"
 mkdir -p logs
 
 echo "Running CKD preflight..."
@@ -10,11 +8,11 @@ bash ckd_preflight.sh
 
 echo
 echo "Submitting CKD benchmark..."
-REAL_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" ckd_real_reference.sbatch)
-SDV_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" ckd_sdv_arf.sbatch)
-DDPM_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" ckd_conditional_ddpm.sbatch)
-LLM_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" ckd_great_llm.sbatch)
-FINAL_JOB=$(sbatch --parsable --export=ALL,BENCHMARK_ROOT="$BENCHMARK_ROOT" --dependency=afterany:${REAL_JOB}:${SDV_JOB}:${DDPM_JOB}:${LLM_JOB} ckd_finalize.sbatch)
+REAL_JOB=$(sbatch --parsable ckd_real_reference.sbatch)
+SDV_JOB=$(sbatch --parsable ckd_sdv_arf.sbatch)
+DDPM_JOB=$(sbatch --parsable ckd_conditional_ddpm.sbatch)
+LLM_JOB=$(sbatch --parsable ckd_great_llm.sbatch)
+FINAL_JOB=$(sbatch --parsable --dependency=afterany:${REAL_JOB}:${SDV_JOB}:${DDPM_JOB}:${LLM_JOB} ckd_finalize.sbatch)
 
 echo
 echo "Submitted:"

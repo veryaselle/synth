@@ -1,0 +1,11 @@
+{
+  "experiment": "independent split-realization robustness check",
+  "stage": "sdv_arf",
+  "dataset": "pima",
+  "split_id": 3,
+  "split_realization_seed": 2026,
+  "generator_seed": 45,
+  "evaluator_seed": 42,
+  "method": "ARF",
+  "primary_policy_held_constant": true
+}

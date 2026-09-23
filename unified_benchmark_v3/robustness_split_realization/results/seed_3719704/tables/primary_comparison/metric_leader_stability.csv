@@ -1,0 +1,25 @@
+dataset,level,criterion,primary_leader,robust_leader,same_leader_set
+ckd,metric,utility_auroc,Conditional DDPM,ARF,False
+ckd,metric,utility_f1,ARF,ARF,True
+ckd,metric,utility_brier,ARF,LLM,False
+ckd,metric,fidelity_pcd,ARF,ARF,True
+ckd,metric,fidelity_ws,ARF,ARF,True
+ckd,metric,fidelity_js,LLM,LLM,True
+ckd,metric,privacy_mia_distance,Gaussian Copula,CopulaGAN,False
+ckd,metric,privacy_aia_risk,CTGAN,Gaussian Copula,False
+cleveland,metric,utility_auroc,Conditional DDPM,LLM,False
+cleveland,metric,utility_f1,Conditional DDPM,LLM,False
+cleveland,metric,utility_brier,Conditional DDPM,Conditional DDPM,True
+cleveland,metric,fidelity_pcd,ARF,ARF,True
+cleveland,metric,fidelity_ws,ARF,ARF,True
+cleveland,metric,fidelity_js,ARF,ARF,True
+cleveland,metric,privacy_mia_distance,CopulaGAN,CTGAN,False
+cleveland,metric,privacy_aia_risk,CopulaGAN,Gaussian Copula,False
+pima,metric,utility_auroc,TVAE,TVAE,True
+pima,metric,utility_f1,TVAE,TVAE,True
+pima,metric,utility_brier,Conditional DDPM,Conditional DDPM,True
+pima,metric,fidelity_pcd,ARF,ARF,True
+pima,metric,fidelity_ws,Conditional DDPM,ARF,False
+pima,metric,fidelity_js,Conditional DDPM,ARF,False
+pima,metric,privacy_mia_distance,CTGAN,Gaussian Copula,False
+pima,metric,privacy_aia_risk,CTGAN,Gaussian Copula,False

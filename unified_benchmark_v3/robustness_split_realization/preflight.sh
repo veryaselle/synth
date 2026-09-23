@@ -4,48 +4,21 @@ ROBUST_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 BENCHMARK_ROOT="$(cd "$ROBUST_ROOT/.." && pwd)"
 cd "$BENCHMARK_ROOT"
 CORE="${CORE_PY:-python}"
-LLM="${LLM_PY:-$CORE}"
 SEED="${ROBUSTNESS_SEED:-2026}"
 TMP_ROOT="${TMPDIR:-/tmp}/synth_split_realization_preflight_${USER:-user}_${SEED}_$$"
 trap 'rm -rf "$TMP_ROOT"' EXIT
 mkdir -p "$TMP_ROOT"
 
-echo "=== INTERPRETER CHECKS ==="
-echo "CORE_PY=$CORE"
-echo "LLM_PY=$LLM"
-"$CORE" - <<'PY'
-import importlib.util
-import sys
-required = ["numpy", "pandas", "sklearn", "scipy", "sdv", "arfpy", "torch"]
-missing = [name for name in required if importlib.util.find_spec(name) is None]
-if missing:
-    raise SystemExit(f"Core environment missing required modules: {missing}")
-print("core environment OK:", sys.executable)
-PY
-"$LLM" - <<'PY'
-import importlib.util
-import sys
-required = ["numpy", "pandas", "torch", "transformers", "be_great"]
-missing = [name for name in required if importlib.util.find_spec(name) is None]
-if missing:
-    raise SystemExit(f"LLM environment missing required modules: {missing}")
-print("LLM environment OK:", sys.executable)
-PY
-
-echo
-echo "=== PREPARE SPLIT REALIZATION (seed=$SEED) ==="
-"$CORE" "$ROBUST_ROOT/prepare_split_realization.py" --seed "$SEED"
+echo "=== PREPARE SECOND SPLIT REALIZATION (seed=$SEED) ==="
+"$CORE" "$ROBUST_ROOT/prepare_second_realization.py" --seed "$SEED"
 
 echo
 echo "=== PYTHON / SHELL SYNTAX ==="
 "$CORE" -m py_compile \
-  "$ROBUST_ROOT/prepare_split_realization.py" \
   "$ROBUST_ROOT/prepare_second_realization.py" \
   "$ROBUST_ROOT/run_stage.py" \
-  "$ROBUST_ROOT/finalize_split_realization.py" \
   "$ROBUST_ROOT/finalize_second_realization.py" \
-  "$ROBUST_ROOT/compare_with_primary.py" \
-  "$ROBUST_ROOT/aggregate_realizations.py"
+  "$ROBUST_ROOT/compare_with_primary.py"
 for f in "$ROBUST_ROOT"/*.sh "$ROBUST_ROOT"/*.sbatch; do
   bash -n "$f"
 done
@@ -63,20 +36,17 @@ for DS in pima cleveland ckd; do
     --stage sdv_arf --dataset "$DS" --split 0 --method tvae \
     --realization_seed "$SEED" --results_root "$TMP_ROOT/dry" --dry_run
   "$CORE" "$ROBUST_ROOT/run_stage.py" \
-    --stage sdv_arf --dataset "$DS" --split 0 --method arf \
-    --realization_seed "$SEED" --results_root "$TMP_ROOT/dry" --dry_run
-  "$CORE" "$ROBUST_ROOT/run_stage.py" \
     --stage ddpm --dataset "$DS" --split 0 \
     --realization_seed "$SEED" --results_root "$TMP_ROOT/dry" --dry_run
 done
 
 # One LLM dry-run on CKD (the widest schema) validates conditioning and adapter input
-# without model fitting. run_stage.py launches generation via LLM_PY and evaluation via CORE_PY.
+# without model fitting. Use LLM_PY if explicitly provided.
 "$CORE" "$ROBUST_ROOT/run_stage.py" \
   --stage llm --dataset ckd --split 0 \
   --realization_seed "$SEED" --results_root "$TMP_ROOT/dry" --dry_run
 
 echo
-echo "SPLIT-REALIZATION PREFLIGHT PASS"
+echo "SECOND-REALIZATION PREFLIGHT PASS"
 echo "Data root: $ROBUST_ROOT/data/seed_${SEED}"
 echo "Primary results remain untouched."

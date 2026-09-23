@@ -1,0 +1,18 @@
+{
+  "method": "ARF",
+  "method_key": "arf",
+  "seed": 42,
+  "n_real_train": 320,
+  "n_synthetic": 320,
+  "synthetic_size": "1x",
+  "epochs": null,
+  "cuda_requested": false,
+  "batch_size": null,
+  "joblib_n_jobs": 1,
+  "generation_seconds": 5.92486310005188,
+  "sdv_version": "1.36.0",
+  "arfpy_version": "0.1.1",
+  "target_prevalence_real": 0.625,
+  "target_prevalence_synthetic": 0.640625,
+  "note": "No post-hoc clipping or arbitrary category repair is applied. Invalid category output causes failure."
+}

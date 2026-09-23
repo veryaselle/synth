@@ -34,6 +34,12 @@ from pathlib import Path
 from typing import Dict, List, Tuple
 
 import numpy as np
+
+# Compatibility shim for arfpy 0.1.1 with newer NumPy.
+# arfpy calls the removed np.in1d; np.isin is its supported replacement.
+if not hasattr(np, "in1d"):
+    np.in1d = np.isin
+
 import pandas as pd
 
 METHOD_MAP = {
@@ -189,12 +195,13 @@ def main() -> None:
     p.add_argument("--epochs", type=int, default=300)
     p.add_argument("--cuda", action="store_true", help="Request GPU if available")
     p.add_argument("--batch_size", type=int, default=500, help="SDV TVAE/CTGAN/CopulaGAN batch size; default matches SDV")
-    p.add_argument("--discriminator_lr", type=float, default=2e-4, help="CTGAN/CopulaGAN discriminator learning rate; frozen default is 2e-4")
     p.add_argument("--verbose", action="store_true", help="Print SDV epoch losses/progress")
     p.add_argument("--joblib_n_jobs", type=int, default=1, help="Limit internal joblib parallelism on shared HPC nodes")
     p.add_argument("--dry_run", action="store_true", help="Validate contract without importing generator packages")
+    p.add_argument("--discriminator_lr", type=float, default=2e-4)
     args = p.parse_args()
 
+    set_seeds(args.seed)
     train = pd.read_csv(args.real_train)
     schema = load_schema(Path(args.schema))
     target = str(schema["target"])
@@ -212,7 +219,6 @@ def main() -> None:
         print(f"DRY RUN PASS: {METHOD_MAP[args.method]} on {len(train)} rows, schema={len(train.columns)} columns")
         return
 
-    set_seeds(args.seed)
     t0 = time.time()
     # Some preprocessing dependencies use joblib internally. On shared nodes,
     # constraining this to one worker avoids unnecessary child processes and
@@ -246,7 +252,6 @@ def main() -> None:
         "epochs": args.epochs if args.method in {"tvae","ctgan","copulagan"} else None,
         "cuda_requested": bool(args.cuda),
         "batch_size": args.batch_size if args.method in {"tvae","ctgan","copulagan"} else None,
-        "discriminator_lr": args.discriminator_lr if args.method in {"ctgan","copulagan"} else None,
         "joblib_n_jobs": args.joblib_n_jobs,
         "generation_seconds": elapsed,
         "sdv_version": pkg_version("sdv"),

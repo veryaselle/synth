@@ -3,11 +3,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 import subprocess
-import sys
 import pandas as pd
-
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
-BENCHMARK_ROOT = REPOSITORY_ROOT / "unified_benchmark_v3"
 
 EXPECTED_METHODS = [
     "REAL",
@@ -32,9 +28,9 @@ def split_from_path(path: Path):
 
 def main():
     p = argparse.ArgumentParser()
-    p.add_argument("--results_root", default=str(BENCHMARK_ROOT / "results/main_benchmark"))
-    p.add_argument("--tables_out", default=str(BENCHMARK_ROOT / "results/main_benchmark/tables"))
-    p.add_argument("--assembler", default=str(BENCHMARK_ROOT / "assemble_main_tables.py"))
+    p.add_argument("--results_root", default=str(Path(__file__).resolve().parent / "results" / "main_benchmark"))
+    p.add_argument("--tables_out", default=str(Path(__file__).resolve().parent / "results" / "main_benchmark" / "tables"))
+    p.add_argument("--assembler", default="assemble_main_tables.py")
     args = p.parse_args()
 
     root = Path(args.results_root)
@@ -89,7 +85,7 @@ def main():
         raise SystemExit(2)
 
     subprocess.run([
-        sys.executable, args.assembler,
+        "python", args.assembler,
         "--results_root", str(root),
         "--outdir", args.tables_out,
     ], check=True)
