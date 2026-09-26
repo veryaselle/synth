@@ -1,10 +1,10 @@
 Place both executable files directly in:
 
-/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/tradeoff_analysis
+/your/path/to/unified_benchmark_v3/tradeoff_analysis
 
 Then run:
 
-cd /home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/tradeoff_analysis
+cd /your/path/to/unified_benchmark_v3/tradeoff_analysis
 sbatch tradeoff_analysis.sbatch
 
 Important b100 layout handled by this version:
