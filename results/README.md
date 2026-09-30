@@ -6,4 +6,6 @@ The Diabetes 130-US `evaluation_snapshot` CSVs were transcribed from the complet
 
 
 ## Results
-Final results in synth/unified_benchmark_v3/results
+Final results in `synth/unified_benchmark_v3/...`
+
+Please look through all subdirectories
