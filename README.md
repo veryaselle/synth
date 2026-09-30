@@ -294,3 +294,7 @@ The thesis benchmark itself is an independently implemented, controlled, and tra
 - split-realization robustness;
 - GAN configuration sensitivity;
 - multi-objective and constraint-based decision analysis.
+
+
+
+## TESTING.md Clean-clone verification step required as a start to be sure all pathes are available

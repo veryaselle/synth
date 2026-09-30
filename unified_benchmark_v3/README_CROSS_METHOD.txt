@@ -1,8 +1,8 @@
-# Cross-method trade-off analysis
+## Cross-method trade-off analysis
 
 Place BOTH files directly in:
 
-/home/sc.uni-leipzig.de/ab20zawy/naster/synthetic_data_evaluation/unified_benchmark_v3/tradeoff_analysis
+/path/to/unified_benchmark_v3/tradeoff_analysis
 
 Required previous outputs:
 

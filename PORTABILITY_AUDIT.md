@@ -1,4 +1,4 @@
-# Portability audit — thesis-v1.0 clone-ready candidate
+# Portability audit — clone-ready candidate
 
 Audit date: 2026-09-03.
 

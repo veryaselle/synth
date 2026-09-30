@@ -69,7 +69,7 @@ Attribute inference hides the diagnosis/target and uses the remaining known attr
 
 This follows the train-vs-control logic used in attack-based synthetic-data privacy evaluation: population-level predictability should raise both member and control attack success, whereas train-specific leakage should preferentially improve member inference.
 
-## Main table per dataset
+## Main table per dataset to fill:
 
 | Method | AUROC ↑ | F1 ↑ | Brier ↓ | PCD ↓ | WS ↓ | JS ↓ | DCR | MIA AUROC | AIA risk ↓ |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|

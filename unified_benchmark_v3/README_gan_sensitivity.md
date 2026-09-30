@@ -1,4 +1,4 @@
-GAN LR sensitivity: discriminator_lr=0.0005, batch_size=100
+## GAN LR sensitivity: discriminator_lr=0.0005, batch_size=100
 
 Requires generate_sdv_arf_safe_cpu.py to already support:
   --discriminator_lr
